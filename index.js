@@ -6,6 +6,7 @@ const app = express()
 const server = http.createServer(app);
 
 app.use('/student',require('./routes/student'));
+app.use('/profesor',require('./routes/profesor'));
 
 
 
