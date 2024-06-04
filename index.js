@@ -5,10 +5,9 @@ const http = require('http')
 const app = express()
 const server = http.createServer(app);
 
-const x = 5;
+app.use('/student',require('./routes/student'));
 
 
-const t = 5;
 
 server.listen(8000,() => {
     console.log("Connected!");
