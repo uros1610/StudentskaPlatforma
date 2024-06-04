@@ -18,8 +18,6 @@ const sviStudentiJedanSmjer = (req,res) => {
 
     const {imeFakulteta,imeSmjera} = req.params;
 
-    
-
     db.query(query,[imeFakulteta,imeSmjera],(err,data) => {
         if(err) {
             return res.status(500).json(err);
@@ -75,6 +73,31 @@ const sviStudentiPredmet = (req,res) => {
     })
 }
 
+const updateRezultat = (req,res) => {
 
-module.exports = {sviStudenti,sviStudentiJedanSmjer,sviPredmetiStudenta,sviRezultatiStudenta,sviStudentiPredmet}
+    const query = "UPDATE Rezultat SET brojPoena = ? WHERE indeks_studenta = ? AND id_provjere = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+
+    const {indeks,idProvjere,imePredmeta,imeSmjera,imeFakulteta} = req.params;
+
+    const brojPoena = req.body.brojPoena;
+
+
+    db.query(query,[brojPoena,indeks,idProvjere,imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+
+        if(err) {
+            return res.status(500).json(err);
+        }
+
+
+        if(data.affectedRows === 0) {
+            return res.status(404).json("Not found");
+        }
+
+        return res.status(200).json("Success");
+    })
+
+}
+
+
+module.exports = {sviStudenti,sviStudentiJedanSmjer,sviPredmetiStudenta,sviRezultatiStudenta,sviStudentiPredmet,updateRezultat}
 
