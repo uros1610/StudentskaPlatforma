@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const {sviStudenti,sviStudentiJedanSmjer,sviRezultatiStudenta,sviPredmetiStudenta} = require('../controllers/student');
+const {sviStudenti,sviStudentiJedanSmjer,sviRezultatiStudenta,sviPredmetiStudenta,sviStudentiPredmet} = require('../controllers/student');
 
 router.get('/',sviStudenti);
 
-router.get('/:imeFakulteta/:imeSmjera',sviStudentiJedanSmjer)
+router.get('/:imeSmjera/:imeFakulteta',sviStudentiJedanSmjer)
 
-router.get('/sviRezultati/:indeks/:imeSmjera',sviRezultatiStudenta);
+router.get('/sviRezultati/:indeks/:imeSmjera/:imeFakulteta',sviRezultatiStudenta);
 
-router.get('sviPredmeti/:indeks/:imeSmjera',sviPredmetiStudenta);
+router.get('/sviPredmeti/:indeks/:imeSmjera/:imeFakulteta',sviPredmetiStudenta);
+
+router.get('/:imePredmeta/:imeSmjera/:imeFakulteta',sviStudentiPredmet);
+
 
 module.exports = router;
