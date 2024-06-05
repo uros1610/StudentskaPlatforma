@@ -10,6 +10,7 @@ app.use(express.json());
 app.use('/student',require('./routes/student'));
 app.use('/profesor',require('./routes/profesor'));
 app.use('/obavjestenje',require('./routes/obavjestenje'));
+app.use('/auth',require('./routes/auth'));
 
 
 
