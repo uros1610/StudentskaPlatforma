@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../styles/login.css'
 import {FaUser,FaLock} from 'react-icons/fa'
 import { useState } from 'react'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -20,7 +21,11 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log(data);
+        try {
+        await axios.post(`/auth/login`,data);
+        }
+        catch(err) {
+        }
     }   
 
 
