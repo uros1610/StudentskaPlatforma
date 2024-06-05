@@ -5,7 +5,7 @@ const {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje} = require('
 
 router.get('/:imePredmeta/:imeSmjera/:imeFakulteta',svaObavjestenjaPredmet);
 
-router.post('/:idProfesora/:imePredmeta/:imeSmjera/:imeFakulteta',insertObavjestenje);
+router.post('/:korisnickoIme/:imePredmeta/:imeSmjera/:imeFakulteta',insertObavjestenje);
 
 router.put('/:idObavjestenja',updateObavjestenje);
 

@@ -5,15 +5,14 @@ const {sviStudenti,sviStudentiJedanSmjer,sviRezultatiStudenta,sviPredmetiStudent
 
 router.get('/',sviStudenti);
 
+router.get('/sviRezultati/:korisnickoIme',sviRezultatiStudenta);
+router.get('/sviRezultati/:korisnickoIme/:imePredmeta/:imeSmjera/:imeFakulteta',sviRezultatiStudenta);
+router.get('/sviRezultati/:korisnickoIme/:imePredmeta/:imeSmjera/:imeFakulteta',sviRezultatiStudenta);
+
+
 router.get('/:imeSmjera/:imeFakulteta',sviStudentiJedanSmjer)
-
-router.get('/sviRezultati/:indeks/:imeSmjera/:imeFakulteta',sviRezultatiStudenta);
-
-router.get('/sviPredmeti/:indeks/:imeSmjera/:imeFakulteta',sviPredmetiStudenta);
-
 router.get('/:imePredmeta/:imeSmjera/:imeFakulteta',sviStudentiPredmet);
-
-router.put("/:indeks/:idProvjere/:imePredmeta/:imeSmjera/:imeFakulteta",updateRezultat);
+router.put("/:korisnickoIme/:idProvjere/:imePredmeta/:imeSmjera/:imeFakulteta",updateRezultat);
 
 
 module.exports = router;

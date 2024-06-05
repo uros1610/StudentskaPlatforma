@@ -7,7 +7,6 @@ const svaObavjestenjaPredmet = (req,res) => {
 
     const {imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
-    console.log("XD",req.params);
 
     db.query(q,[imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
         if(err) {
@@ -20,29 +19,22 @@ const svaObavjestenjaPredmet = (req,res) => {
 }
 
 const insertObavjestenje = (req,res) => { // provjera preko tokena da li je to on
-    const query = "SELECT * FROM ProfesorPredmet WHERE id_profesora = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
 
-    jwt.verify(token, 'your_secret_key', (err, decoded) => {
-        if (err) {
-            return res.status(401).json("Unauthorized: Invalid token!");
-        }
-
-        const idProfesora = decoded.idProfesora;
-        const { imePredmeta, imeSmjera, imeFakulteta } = req.params;
+        const {korisnickoIme,imePredmeta, imeSmjera, imeFakulteta } = req.params;
 
         console.log(req.body);
 
-        const query = "SELECT * FROM ProfesorPredmet WHERE id_profesora = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+        const query = "SELECT * FROM profesor_predmet WHERE korisnickoime_profesora = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
         
-        db.query(query, [idProfesora, imePredmeta, imeSmjera, imeFakulteta], (err, data) => {
+        db.query(query, [korisnickoIme, imePredmeta, imeSmjera, imeFakulteta], (err, data) => {
             if (err) {
                 return res.status(500).json("Internal server error!");
             }
             if (!data.length) {
                 return res.status(403).json("Forbidden!");
             }
-            const values = [Date.now(), req.body.opis, req.body.naslov, idProfesora, imePredmeta, imeSmjera, imeFakulteta];
-            const queryInsert = "INSERT INTO Obavjestenje(datum_kreiranja, opis, naslov, id_profesora, ime_predmeta, ime_smjera, ime_fakulteta) VALUES(?)";
+            const values = [new Date(), req.body.opis, req.body.naslov, korisnickoIme, imePredmeta, imeSmjera, imeFakulteta];
+            const queryInsert = "INSERT INTO Obavjestenje(datum_kreiranja, opis, naslov, korisnickoime_profesora, ime_predmeta, ime_smjera, ime_fakulteta) VALUES(?)";
 
             db.query(queryInsert, [values], (err, data) => {
                 if (err) {
@@ -54,7 +46,7 @@ const insertObavjestenje = (req,res) => { // provjera preko tokena da li je to o
                 }
             });
         });
-    });
+    
 }
 
 const updateObavjestenje = (req,res) => {
@@ -65,7 +57,6 @@ const updateObavjestenje = (req,res) => {
             return res.status(401).json("Unauthorized: Invalid token!");
         }})
 
-        const idProfesora = decoded.idProfesora;
 
     db.query(q,[Date.now(),req.body.naslov,req.body.opis,req.params.idObavjestenja],(err,data) => {
         if(err) {

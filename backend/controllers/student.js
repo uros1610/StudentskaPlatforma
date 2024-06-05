@@ -27,11 +27,12 @@ const sviStudentiJedanSmjer = (req,res) => {
 }
 
 const sviRezultatiStudenta = (req,res) => {
-    const query = "SELECT * FROM Rezultat  WHERE indeks_studenta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
-    
-    const {indeks,imeSmjera,imeFakulteta} = req.params;
+    const query = "SELECT * FROM Rezultat WHERE korisnickoime_studenta = ?"
 
-    db.query(query,[indeks,imeSmjera,imeFakulteta],(err,data) => {
+    
+    const {korisnickoIme} = req.params;
+
+    db.query(query,[korisnickoIme],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
@@ -40,12 +41,25 @@ const sviRezultatiStudenta = (req,res) => {
     })
 }
 
-const sviPredmetiStudenta = (req,res) => {
-    const query = "SELECT * FROM Pohadja  WHERE indeks = ? AND ime_smjera = ? AND ime_fakulteta = ?"
+const sviRezultatiStudentaJedanPredmet = (req,res) => {
+    const query = "SELECT * FROM Rezultat WHERE korisnickoime_studenta = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
     
-    const {indeks,imeSmjera,imeFakulteta} = req.params;
+    const {korisnickoIme,imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
-    db.query(query,[indeks,imeSmjera,imeFakulteta],(err,data) => {
+    db.query(query,[korisnickoIme,imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+        if(err) {
+            return res.status(500).json(err);
+        }
+
+        return res.status(200).json(data);
+    })
+}
+const sviPredmetiStudenta = (req,res) => {
+    const query = "SELECT * FROM Pohadja  WHERE korisnickoime_studenta = ?"
+    
+    const {korisnickoIme} = req.params;
+
+    db.query(query,[korisnickoIme],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
@@ -55,7 +69,7 @@ const sviPredmetiStudenta = (req,res) => {
 }
 
 const sviStudentiPredmet = (req,res) => {
-    const query = "SELECT s.indeks_studenta,s.ime_studenta,s.prezime_studenta FROM Pohadja p INNER JOIN Student s ON s.indeks_studenta = p.indeks_studenta WHERE ime_predmeta = ? AND p.ime_smjera = ? AND s.ime_fakulteta = ? "
+    const query = "SELECT s.korisnickoime_studenta, s.indeks_studenta,s.ime_studenta,s.prezime_studenta FROM Pohadja p INNER JOIN Student s ON s.korisnickoime_studenta = p.korisnickoime_studenta WHERE ime_predmeta = ? AND p.ime_smjera = ? AND s.ime_fakulteta = ? "
 
 
     const imePredmeta = req.params.imePredmeta;
@@ -75,14 +89,14 @@ const sviStudentiPredmet = (req,res) => {
 
 const updateRezultat = (req,res) => {
 
-    const query = "UPDATE Rezultat SET brojPoena = ? WHERE indeks_studenta = ? AND id_provjere = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+    const query = "UPDATE Rezultat SET brojPoena = ? WHERE korisnickoime_studenta = ? AND id_provjere = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
 
-    const {indeks,idProvjere,imePredmeta,imeSmjera,imeFakulteta} = req.params;
+    const {korisnickoIme,idProvjere,imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
     const brojPoena = req.body.brojPoena;
 
 
-    db.query(query,[brojPoena,indeks,idProvjere,imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+    db.query(query,[brojPoena,korisnickoIme,idProvjere,imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
 
         if(err) {
             return res.status(500).json(err);
@@ -99,5 +113,5 @@ const updateRezultat = (req,res) => {
 }
 
 
-module.exports = {sviStudenti,sviStudentiJedanSmjer,sviPredmetiStudenta,sviRezultatiStudenta,sviStudentiPredmet,updateRezultat}
+module.exports = {sviStudenti,sviStudentiJedanSmjer,sviPredmetiStudenta,sviRezultatiStudenta,sviStudentiPredmet,updateRezultat,sviRezultatiStudentaJedanPredmet}
 
