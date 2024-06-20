@@ -3,6 +3,7 @@ import styles from '../styles/login.css'
 import {FaUser,FaLock} from 'react-icons/fa'
 import { useState } from 'react'
 import axios from 'axios'
+import slikaFakultet from '../img/login_img.jpg'
 
 const Login = () => {
 
@@ -34,10 +35,11 @@ const Login = () => {
     <div className = "loginDiv">
 
         <div className = "wrapZaSliku">
-            <img src = "https://www.ucg.ac.me/skladiste/blog_10/objava_180884//Univerzitet%20Crne%20Gore.jpg" className = "slikaFakultet"/>
+            <img src = {slikaFakultet} className = "slikaFakultet"/>
         </div>
 
         <form className = "loginForm">
+
 
             <p className = "imeSajta">ezINDEX</p>
 

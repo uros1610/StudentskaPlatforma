@@ -41,6 +41,7 @@
     padding:5px 10px;
     width:85%;
     max-width: 300px;
+    border-radius: 10px;
 }
 
 #lozinka,#korisnickoIme , input::placeholder {
@@ -63,27 +64,34 @@ svg {
 }
 
 .userIcon {
-    color: #0f75bd;
-    stroke: white;
-    stroke-width: 30px;
-    fill: currentColor;
+    color: white;
+    width: 15px;
+    /* stroke: white; */
+    /* stroke-width: 30px; */
+    /* fill: currentColor; */
 }
 
 .lockIcon {
-    color:#f7941d;
-    stroke: white;
+    color: white;
+    width: 15px;
+    /* stroke: white;
     stroke-width: 30px;
-    fill: currentColor;
+    fill: currentColor; */
 
 }
 
 .loginButton {
+    margin-top: 10px;
     background-color: #0f75bd;
-    padding:10px 30px;
     color:#E8EDF0;
     border: none;
+    border-radius: 10px;
+    width: max-content;
+    padding: 15px;
 }
 
 .loginButton:hover {
     cursor: pointer;
+    background-color: #f7941d;
+    color: black;
 }
