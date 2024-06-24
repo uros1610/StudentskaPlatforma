@@ -1,4 +1,5 @@
 const db = require('../db');
+const jwt = require('jsonwebtoken')
 
 
 const sviStudenti = (req,res) => {
@@ -29,17 +30,24 @@ const sviStudentiJedanSmjer = (req,res) => {
 const sviRezultatiStudenta = (req,res) => {
     const query = "SELECT * FROM Rezultat WHERE korisnickoime_studenta = ?"
 
-    
-    const {korisnickoIme} = req.params;
+    const token = req.headers.authorization.split(":")[1];
 
-    db.query(query,[korisnickoIme],(err,data) => {
+
+    jwt.verify(token,process.env.SECRET_KEY,(err,data) => {
+
+    if(err) {
+        return res.status(403).json("Forbidden!");
+    }
+    
+
+    db.query(query,[data.korisnickoIme],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
 
         return res.status(200).json(data);
     })
-}
+})}
 
 const sviRezultatiStudentaJedanPredmet = (req,res) => {
     const query = "SELECT * FROM Rezultat WHERE korisnickoime_studenta = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
@@ -55,21 +63,30 @@ const sviRezultatiStudentaJedanPredmet = (req,res) => {
     })
 }
 const sviPredmetiStudenta = (req,res) => {
-    const query = "SELECT * FROM Pohadja  WHERE korisnickoime_studenta = ?"
-    
-    const {korisnickoIme} = req.params;
+    const query = "SELECT * FROM Pohadja WHERE korisnickoime_studenta = ?"
 
-    db.query(query,[korisnickoIme],(err,data) => {
+    const token = req.headers.authorization.split(":")[1];
+
+
+    jwt.verify(token,process.env.SECRET_KEY,(err,data) => {
+
+    if(err) {
+        return res.status(403).json("Forbidden!");
+    }
+    
+
+    db.query(query,[data.korisnickoIme],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
 
         return res.status(200).json(data);
     })
-}
+})}
+    
 
 const sviStudentiPredmet = (req,res) => {
-    const query = "SELECT s.korisnickoime_studenta, s.indeks_studenta,s.ime_studenta,s.prezime_studenta FROM Pohadja p INNER JOIN Student s ON s.korisnickoime_studenta = p.korisnickoime_studenta WHERE ime_predmeta = ? AND p.ime_smjera = ? AND s.ime_fakulteta = ? "
+    const query = "SELECT s.korisnickoime, s.indeks_studenta,s.ime_studenta,s.prezime_studenta FROM Pohadja p INNER JOIN Student s ON s.korisnickoime = p.korisnickoime_studenta WHERE ime_predmeta = ? AND p.ime_smjera = ? AND s.ime_fakulteta = ? "
 
 
     const imePredmeta = req.params.imePredmeta;
@@ -89,7 +106,7 @@ const sviStudentiPredmet = (req,res) => {
 
 const updateRezultat = (req,res) => {
 
-    const query = "UPDATE Rezultat SET brojPoena = ? WHERE korisnickoime_studenta = ? AND id_provjere = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+    const query = "UPDATE Rezultat SET broj_poena = ? WHERE korisnickoime_studenta = ? AND id_provjere = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
 
     const {korisnickoIme,idProvjere,imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
