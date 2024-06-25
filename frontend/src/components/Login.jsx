@@ -1,9 +1,11 @@
 import React from 'react'
-import styles from '../styles/login.css'
+import '../styles/login.css'
 import {FaUser,FaLock} from 'react-icons/fa'
 import { useState } from 'react'
 import axios from 'axios'
 import slikaFakultet from '../img/login_img.jpg'
+import logo from '../img/logo_si.png'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -32,33 +34,35 @@ const Login = () => {
 
 
   return (
-    <div className = "loginDiv">
+    <main id="login-body">
+            <div id="content-login">
+                <div id="login-div">
+                    <div id="login-ttl">
+                        <div id="logo-title-login">
+                            <img alt="Logo" src={logo} id="login-logo-img" />
+                            <h1 id="h1-login">ezIndex</h1>
+                        </div>
+                        {/* <p id="login-p-mess">Nemaš nalog? <Link to="/register">Registruj se sada!</Link></p> */}
+                    </div>
+                    <form id="form-login">
+                        <div className = "inputUserNameDiv">
+                            <FaUser className = "userIcon"/>
+                            <input type="text" name="username" id="username-login" className="login-inp" required placeholder='Korisničko ime' onChange={handleChange} />
+                        </div>
 
-        <div className = "wrapZaSliku">
-            <img src = {slikaFakultet} className = "slikaFakultet"/>
-        </div>
+                        <div className = "inputPasswordDiv">
+                            <FaLock className = "lockIcon"/>
+                            <input type="password" name="password" id="password-login" className="login-inp" required placeholder='Lozinka' onChange={handleChange} />
+                        </div>
 
-        <form className = "loginForm">
-
-
-            <p className = "imeSajta">ezINDEX</p>
-
-            <div className = "inputUserNameDiv">
-                <FaUser className = "userIcon"/>
-                <input type = "text" placeholder = "Korisničko ime" id = "korisnickoIme" onChange={handleChange}/>
+                        <button className = "loginButton" onClick = {handleLogin}>Login</button>
+                    </form>
+                </div>
+                <div id="image-login">
+                    <img alt="Početna slika" src={slikaFakultet} id="login-img" />
+                </div>
             </div>
-
-            <div className = "inputPasswordDiv">
-                <FaLock className = "lockIcon"/>
-                <input type = "password" placeholder = "Lozinka" id = "lozinka"  onChange={handleChange}/>
-            </div>
-
-            <button className = "loginButton" onClick = {handleLogin}>LOGIN</button>
-
-
-        </form>
-
-    </div>
+        </main>
   )
 }
 

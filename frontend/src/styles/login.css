@@ -1,97 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.loginDiv {
+#login-body {
     display: flex;
-    width:95%;
-    position: absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
-   
-}
-
-.wrapZaSliku, .loginForm {
-    width: 50%;
-    height: 500px;
-}
-
-.slikaFakultet {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.imeSajta {
-    font-size:2rem;
-}
-
-.loginForm {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     justify-content: center;
-    gap:15px;
-    background-color: #E8EDF0;
-}
-
-.inputUserNameDiv, .inputPasswordDiv {
-    display: flex;
     align-items: center;
-    background-color: rgba(15,117,189,255);
-    gap:10px;
-    padding:5px 10px;
-    width:85%;
-    max-width: 300px;
+    height: 100vh;
+    background-color: #0f75bd;
+}
+
+#content-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(255, 254, 254, 0.5);
+    background-color: white;
+}
+
+#login-img {
+    width: 500px;
+}
+
+#h1-login {
+    text-align: center;
+    font-size: 46px;
+    color: #0f75bd;
+}
+
+#login-p-mess {
+    text-align: center;
+    color: #703452;
+    /* padding-bottom: 50px; */
+}
+
+#form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-lbl {
+    padding-bottom: 10px;
+    color: #703452;
+}
+
+.inputUserNameDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 300px;
     border-radius: 10px;
+    border: 1px solid #0f75bd;
+    padding: 10px;
 }
 
-#lozinka,#korisnickoIme , input::placeholder {
-    background-color: rgba(15,117,189,255);
-    color:#E8EDF0;
+.inputUserNameDiv input {
     border: none;
-    width: 100%;
-    font-size:1rem;
-
-}
-
-#lozinka:focus, #korisnickoIme:focus {
     outline: none;
 }
 
-svg {
-    height: 25px;
-    width: 25px;
-    z-index: 5;
-}
-
 .userIcon {
-    color: white;
-    width: 15px;
-    /* stroke: white; */
-    /* stroke-width: 30px; */
-    /* fill: currentColor; */
+    color: #0f75bd;
 }
 
 .lockIcon {
-    color: white;
-    width: 15px;
-    /* stroke: white;
-    stroke-width: 30px;
-    fill: currentColor; */
+    color: #0f75bd;
 
+}
+
+.inputPasswordDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid #0f75bd;
+    padding: 10px;
+}
+
+.inputPasswordDiv input {
+    border: none;
+    outline: none;
 }
 
 .loginButton {
     margin-top: 10px;
     background-color: #0f75bd;
-    color:#E8EDF0;
-    border: none;
-    border-radius: 10px;
+    color: white;
     width: max-content;
-    padding: 15px;
+    padding: 10px;
+    border: 1px solid #a45d830a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    scale: 1;
+    transition: all 0.5s ease;
+}
+
+#login-div {
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+#login-logo-img {
+    width: 100px;
+}
+
+#logo-title-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#login-ttl {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#image-login {
+    display: flex;
+    justify-content: center;
+}
+
+#logo-title-login img {
+    width: 50px;
 }
 
 .loginButton:hover {
-    cursor: pointer;
     background-color: #f7941d;
-    color: black;
+    color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    scale: 1.1;
+    transition: all 0.5s ease;
+}
+
+#login-img {
+    border-radius: 10px;
 }
