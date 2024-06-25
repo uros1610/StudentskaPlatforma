@@ -1,9 +1,20 @@
 import React from "react"
+import logo from "../images/logo_si.png"
+import { Link } from "react-router-dom"
+import "../styles/header.css"
 
 const Header = () => {
     return (
-        <div>
-            Header
+        <div id="hreader-container">
+            <header id="header">
+                <nav className="header-nav header-padding-nav">
+                    <img src={logo} alt="Logo" id="header-logo-img" />
+                    <ul>
+                        <li><Link to="/profile">Profil</Link></li>
+                        <li><Link to="/login">Log out</Link></li>
+                    </ul>
+                </nav>
+            </header>
         </div>
     )
 }
