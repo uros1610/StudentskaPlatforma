@@ -2,6 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faSquarePollVertical, faBell, faBook, faFileLines } from '@fortawesome/free-solid-svg-icons'
 import "../styles/home.css"
+import { Link } from "react-router-dom"
 
 const Home = () => {
     return (
@@ -9,32 +10,42 @@ const Home = () => {
 
             <div id="home-main">
                 <div className="row">
-                <div className="home-card">
-                    <FontAwesomeIcon icon={faCalendar} className="home-icons" />
-                    <h2 className="home-title">Kalendar</h2>
-                </div>
+                    <Link to="/calendar" className="home-links">
+                        <div className="home-card">
+                            <FontAwesomeIcon icon={faCalendar} className="home-icons" />
+                            <h2 className="home-title">Kalendar</h2>
+                        </div>
+                    </Link>
 
-                <div className="home-card">
-                    <FontAwesomeIcon icon={faSquarePollVertical} className="home-icons" />
-                    <h2 className="home-title">Pregled rezultata</h2>
-                </div>
+                    <Link to="/results" className="home-links">
+                        <div className="home-card">
+                            <FontAwesomeIcon icon={faSquarePollVertical} className="home-icons" />
+                            <h2 className="home-title">Pregled rezultata</h2>
+                        </div>
+                    </Link>
 
-                <div className="home-card">
-                    <FontAwesomeIcon icon={faBell} className="home-icons" />
-                    <h2 className="home-title">Obavještenja</h2>
-                </div>
+                    <Link to="/notifications" className="home-links">
+                        <div className="home-card">
+                            <FontAwesomeIcon icon={faBell} className="home-icons" />
+                            <h2 className="home-title">Obavještenja</h2>
+                        </div>
+                    </Link>
                 </div>
 
                 <div className="row">
-                <div className="home-card">
-                    <FontAwesomeIcon icon={faBook} className="home-icons" />
-                    <h2 className="home-title">Matrijali</h2>
-                </div>
+                    <Link to="/materials" className="home-links">
+                        <div className="home-card">
+                            <FontAwesomeIcon icon={faBook} className="home-icons" />
+                            <h2 className="home-title">Matrijali</h2>
+                        </div>
+                    </Link>
 
-                <div className="home-card">
-                    <FontAwesomeIcon icon={faFileLines} className="home-icons" />
-                    <h2 className="home-title">Matični list</h2>
-                </div>
+                    <Link to="/grade-sheet" className="home-links">
+                        <div className="home-card">
+                            <FontAwesomeIcon icon={faFileLines} className="home-icons" />
+                            <h2 className="home-title">Matični list</h2>
+                        </div>
+                    </Link>
                 </div>  
             </div>
 

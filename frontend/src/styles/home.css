@@ -43,10 +43,15 @@
 .home-icons {
     font-size: 30px;
     color: #0f75bd;
+    margin-bottom: 15px;
 }
 
 .home-card:hover {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     scale: 1.1;
     transition: scale 0.5s ease;
+}
+
+.home-links {
+    text-decoration: none;
 }
