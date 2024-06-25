@@ -5,16 +5,15 @@ export default function setupInterceptors(){
     axios.interceptors.response.use(response => {            
         return response;
     }, error => {
-     
-        if(error.response.message) {
-            return Promise.reject(error);
-        }
+        console.log(error.response.data)
+       
     
 
         if(error.request.status === 401 || error.request.status === 403) {
             localStorage.removeItem('token')
             localStorage.removeItem('user')
-            window.location.href = "/login";
+            window.location.href = '/login';
+            return;
         }
 
         

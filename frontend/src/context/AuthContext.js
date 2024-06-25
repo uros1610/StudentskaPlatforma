@@ -14,11 +14,16 @@ export const AuthContextProvider = ({children}) => {
     const [user,setuser] = useState(JSON.parse(localStorage.getItem('user')) || null)
 
     const login = async (inputs) => {
+        try {
         const resp = await axios.post(`/auth/login`,inputs)
         const data = {rola:resp.data.rola,korisnickoIme:resp.data.korisnickoIme,imeSmjera:resp.data.imeSmjera,imeFakulteta:resp.data.imeFakulteta}
         setuser(data)
         localStorage.setItem('token',resp.data.token)
         console.log(resp.data)
+        }
+        catch(err) {
+            
+        }
     }
 
     const logout = async () => {
