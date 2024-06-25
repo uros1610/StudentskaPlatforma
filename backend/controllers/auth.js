@@ -49,7 +49,7 @@ const login = (req,res) => {
 
             const sendObj = {korisnickoIme:data[0].korisnickoime,rola:"Profesor",token:token};
 
-            return res.status(200).json(sendObj);
+            res.status(200).json(sendObj);
             }
         })
 

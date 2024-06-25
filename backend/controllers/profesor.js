@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken')
 
 
 const sviPredmetiProfesor = (req,res) => {
-    const query = "SELECT ime_predmeta, ime_smjera, ime_fakulteta FROM profesor_predmet WHERE korisnickoime_profesora = ?"
+    const query = "SELECT ime_predmeta AS imePredmeta, ime_smjera AS imeSmjera, ime_fakulteta AS imeFakulteta FROM profesor_predmet WHERE korisnickoime_profesora = ?"
 
+    console.log("OVDJE SAD");
 
    const token = req.headers.authorization.split(" ")[1];
 
@@ -24,7 +25,8 @@ const sviPredmetiProfesor = (req,res) => {
         if(err) {
             return res.status(500).json(err);
         }
-
+        console.log("sdKDSFJFSDJFSDGJDSFGJSDGFJGFSD");
+        console.log(data);
         return res.status(200).json(data);
     })
 })}
