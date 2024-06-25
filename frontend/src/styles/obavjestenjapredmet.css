@@ -1,0 +1,9 @@
+.obavjestenjaPredmet {
+    background-color: #0f75bd;
+    display: flex;
+    min-height: 100vh;
+    align-items: flex-start;
+    justify-content: center;
+    padding:10px 10px;
+    gap:20px;
+}
