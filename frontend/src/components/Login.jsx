@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../styles/login.css'
 import {FaUser,FaLock} from 'react-icons/fa'
 import { useState } from 'react'
@@ -7,6 +7,7 @@ import slikaFakultet from '../img/login_img.jpg'
 import logo from '../img/logo_si.png'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import AuthContext from '../context/AuthContext'
 
 const Login = () => {
 
@@ -14,6 +15,8 @@ const Login = () => {
        korisnickoIme:"",
        lozinka:"" 
     })
+
+    const {login} = useContext(AuthContext)
 
     const handleChange = (e) => {
         const newObj = {...data};
@@ -27,7 +30,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-        await axios.post(`/auth/login`,data);
+        await login(data);
         navigate('/home');
         }
         catch(err) {
