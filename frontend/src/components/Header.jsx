@@ -10,8 +10,8 @@ const Header = () => {
                 <nav className="header-nav header-padding-nav">
                     <img src={logo} alt="Logo" id="header-logo-img" />
                     <ul>
-                        <li><Link to="/profile">Profil</Link></li>
-                        <li><Link to="/login">Log out</Link></li>
+                        <li><Link to="/profile">Nalog</Link></li>
+                        <li><Link to="/login">Odjavi se</Link></li>
                     </ul>
                 </nav>
             </header>
