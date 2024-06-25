@@ -6,6 +6,7 @@ import axios from 'axios'
 import slikaFakultet from '../img/login_img.jpg'
 import logo from '../img/logo_si.png'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -22,10 +23,12 @@ const Login = () => {
         setData(newObj);
     }
 
+    const navigate = useNavigate();
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
         await axios.post(`/auth/login`,data);
+        navigate('/home');
         }
         catch(err) {
         }
@@ -47,12 +50,12 @@ const Login = () => {
                     <form id="form-login">
                         <div className = "inputUserNameDiv">
                             <FaUser className = "userIcon"/>
-                            <input type="text" name="username" id="username-login" className="login-inp" required placeholder='Korisničko ime' onChange={handleChange} />
+                            <input type="text" name="username" id="username" className="login-inp" required placeholder='Korisničko ime' onChange={handleChange} />
                         </div>
 
                         <div className = "inputPasswordDiv">
                             <FaLock className = "lockIcon"/>
-                            <input type="password" name="password" id="password-login" className="login-inp" required placeholder='Lozinka' onChange={handleChange} />
+                            <input type="password" name="password" id="password" className="login-inp" required placeholder='Lozinka' onChange={handleChange} />
                         </div>
 
                         <button className = "loginButton" onClick = {handleLogin}>Login</button>
