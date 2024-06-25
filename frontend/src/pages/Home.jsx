@@ -36,7 +36,7 @@ const Home = () => {
                     <Link to="/materials" className="home-links">
                         <div className="home-card">
                             <FontAwesomeIcon icon={faBook} className="home-icons" />
-                            <h2 className="home-title">Matrijali</h2>
+                            <h2 className="home-title">Materijali</h2>
                         </div>
                     </Link>
 
