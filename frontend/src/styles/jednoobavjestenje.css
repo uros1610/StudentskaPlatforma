@@ -7,8 +7,14 @@
     justify-content: center;
     gap:15px;
     border-radius: 15px;
-    padding:10px 10px;
+    padding:20px 20px;
     color: #0f75bd;
+    width: 300px;
+    min-height: 150px;
+}
+
+.jednoObavjestenje:hover {
+    cursor: pointer;
 }
 
 .tekstObavjestenja {
@@ -52,7 +58,14 @@
 #oznaciProcitano:hover {
     cursor: pointer;
     background-color: #f7941d;
-    color: black;
+    color: white;
+}
+
+#dugmadDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:15px;
 }
 
 
