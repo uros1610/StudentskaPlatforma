@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const sviPredmetiProfesor = (req,res) => {
     const query = "SELECT ime_predmeta AS imePredmeta, ime_smjera AS imeSmjera, ime_fakulteta AS imeFakulteta FROM profesor_predmet WHERE korisnickoime_profesora = ?"
 
-    console.log("OVDJE SAD");
+   
 
    const token = req.headers.authorization.split(" ")[1];
 
