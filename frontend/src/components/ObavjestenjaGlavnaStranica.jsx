@@ -12,6 +12,8 @@ const ObavjestenjaGlavnaStranica = () => {
     const {user} = useContext(AuthContext)
     const {predmeti} = useContext(PredmetContext);
 
+    console.log(predmeti);
+
 
  
 
