@@ -1,39 +1,73 @@
-import {
-  createBrowserRouter,
-  Outlet,
-  RouterProvider,
-} from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
-
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      }
-    ]
-  }
-]);
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Login from "./components/Login";
+import ObavjestenjaGlavnaStranica from "./components/ObavjestenjaGlavnaStranica";
+import ObavjestenjaPredmet from "./components/ObavjestenjaPredmet";
+import NovoObavjestenje from "./components/NovoObavjestenje";
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        
+        <Route
+          path="/notifications/"
+          element={
+            <>
+              <Header />
+              <ObavjestenjaGlavnaStranica />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path = "/notifications/:imePredmeta/:imeSmjera/:imeFakulteta"
+          element={
+            <>
+              <Header />
+              <ObavjestenjaPredmet/>
+              <Footer />
+            </>}
+
+            />
+          
+
+        <Route
+          path="/newNotification/*"
+          element={
+            <>
+              <Header />
+              <NovoObavjestenje />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/editNotification/:id"
+          element={
+            <>
+              <Header />
+              <NovoObavjestenje type="edit" />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/Home"
+          element={
+            <>
+              <Header />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }
