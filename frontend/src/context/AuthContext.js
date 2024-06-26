@@ -18,11 +18,12 @@ export const AuthContextProvider = ({children}) => {
         const resp = await axios.post(`/auth/login`,inputs)
         const data = {rola:resp.data.rola,korisnickoIme:resp.data.korisnickoIme,imeSmjera:resp.data.imeSmjera,imeFakulteta:resp.data.imeFakulteta}
         setuser(data)
+        console.log(data);
         localStorage.setItem('token',resp.data.token)
         console.log(resp.data)
         }
         catch(err) {
-            
+
         }
     }
 

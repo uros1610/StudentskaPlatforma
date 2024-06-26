@@ -14,6 +14,7 @@ export const PredmetContextProvider = ({ children }) => {
                     if (user.rola === 'Student') {
                         const response = await axios.get('/student/sviPredmetiStudenta');
                         setPredmeti(response.data);
+                        console.log(response.data);
                     } else if (user.rola === 'Profesor') {
                         const response = await axios.get('/profesor/sviPredmetiProfesora');
                         setPredmeti(response.data);
