@@ -1,0 +1,33 @@
+.predmetDiv {
+    display: flex;
+    align-items: center;
+    gap:10px;
+    background-color: #0f74bd28;
+    color: #0f75bd;
+    font-weight: bold;
+    padding:30px 10px;
+    width:50%;
+    min-width: 260px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+
+.predmetDiv:hover .obavjestenjeIkonica {
+    transition: scale 0.3s ease-in-out;
+    scale:1.3
+}
+
+.imePredmeta {
+    flex:5;
+}
+.obavjestenjeIkonica {
+    color: #f7941d;
+    min-height:50px;
+    min-width: 50px;
+    scale: 1;
+    transition: scale 0.3s ease-in-out;
+
+
+}
+
