@@ -38,13 +38,15 @@
     margin-right: 0;
 }
 
-#hreader-container .header-nav ul li a {
+#hreader-container .header-nav ul li a, #hreader-container .header-nav ul li span {
     padding: 4px 8px;
     color: white;
     text-decoration: none;
 }
 
-#hreader-container .header-nav ul li a:hover {
+#hreader-container .header-nav ul li a:hover, 
+#hreader-container .header-nav ul li span:hover   {
     border-bottom: 1px solid #f7941d;
     color: #f7941d;
+    cursor: pointer;
 }

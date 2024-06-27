@@ -28,10 +28,16 @@ export const AuthContextProvider = ({children}) => {
     }
 
     const logout = async () => {
-        const resp = await axios.post(`/auth/logout`)
+
+        try {
+        console.log("USAO ovdje");
         setuser(null)
         localStorage.removeItem('token')
         navigate('/login')
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
 
     useEffect(() => {

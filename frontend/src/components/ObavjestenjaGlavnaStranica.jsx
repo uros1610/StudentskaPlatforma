@@ -1,25 +1,35 @@
-import React, { useContext, useEffect } from 'react'
-import { useState } from 'react'
-import axios from 'axios';
-import Obavjestenje from './JednoObavjestenje';
-import AuthContext from '../context/AuthContext';
+import React, { useContext, useEffect } from 'react';
 import Predmet from './Predmet';
+import AuthContext from '../context/AuthContext';
 import PredmetContext from '../context/PredmetContext';
-import styles from '../styles/obavjestenjaglavna.css'
+import styles from '../styles/obavjestenjaglavna.css';
 
 const ObavjestenjaGlavnaStranica = () => {
+    const { user } = useContext(AuthContext);
+    const { predmeti, fetchPredmeti } = useContext(PredmetContext);
 
-    const {user} = useContext(AuthContext)
-    const {predmeti} = useContext(PredmetContext);
+    useEffect(() => {
+        if (user) {
+            fetchPredmeti();
+        }
+    }, [user]);
 
-    console.log(predmeti);
+    if (!user) {
+        return <div>Please log in to see the notifications.</div>;
+    }
 
+    return (
+        <div className="sviPredmetiObavjestenja">
+            {predmeti.map((predmet) => (
+                <Predmet
+                    
+                    imePredmeta={predmet.imePredmeta}
+                    imeSmjera={predmet.imeSmjera}
+                    imeFakulteta={predmet.imeFakulteta}
+                />
+            ))}
+        </div>
+    );
+};
 
- 
-
-  return (
-    <div className = "sviPredmetiObavjestenja">{predmeti.map(predmet => <Predmet imePredmeta={predmet.imePredmeta} imeSmjera={predmet.imeSmjera} imeFakulteta={predmet.imeFakulteta}/>)}</div>
-  )
-}
-
-export default ObavjestenjaGlavnaStranica
+export default ObavjestenjaGlavnaStranica;
