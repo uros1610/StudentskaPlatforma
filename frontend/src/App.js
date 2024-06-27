@@ -39,7 +39,7 @@ function App() {
           
 
         <Route
-          path="/newNotification/*"
+          path="/newNotification/:imePredmeta/:imeSmjera/:imeFakulteta"
           element={
             <>
               <Header />
