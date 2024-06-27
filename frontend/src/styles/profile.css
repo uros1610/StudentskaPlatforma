@@ -34,7 +34,7 @@
     text-align: left;
 }
 
-#profile-table th, td {
+#profile-table th, #profile-table td {
     padding: 15px;
     text-align: left;
     font-size: 18px;
