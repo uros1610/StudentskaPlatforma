@@ -6,6 +6,7 @@ import ObavjestenjaGlavnaStranica from "./components/ObavjestenjaGlavnaStranica"
 import ObavjestenjaPredmet from "./components/ObavjestenjaPredmet";
 import NovoObavjestenje from "./components/NovoObavjestenje";
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -63,6 +64,16 @@ function App() {
             <>
               <Header />
               <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Header />
+              <Profile />
               <Footer />
             </>
           }
