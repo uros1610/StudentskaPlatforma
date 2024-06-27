@@ -32,6 +32,52 @@ const sviPredmetiProfesor = (req,res) => {
 })}
 
 
+const sveInfoProfesor = (req, res) => {
+    const query = `
+        SELECT 
+            ime_profesora AS ime,
+            prezime_profesora AS prezime,
+            datum_rodjenja_profesora AS datumRodjenja,
+            korisnickoime AS korisnickoIme 
+        FROM Profesor
+        WHERE korisnickoime = ?`;
+
+    
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(403).json("Forbidden! No token provided.");
+    }
+
+    const token = authHeader.split(" ")[1];
+
+  
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(403).json("Forbidden! Invalid token.");
+        }
+
+        
+        const korisnickoIme = decoded.korisnickoIme;
+        
+        
+        db.query(query, [korisnickoIme], (err, results) => {
+            if (err) {
+                return res.status(500).json("Internal Server Error: " + err.message);
+            }
+
+           
+            if (results.length === 0) {
+                return res.status(404).json("Profesor not found");
+            }
+
+            
+            return res.status(200).json(results);
+        });
+    });
+};
 
 
-module.exports = {sviPredmetiProfesor}
+
+
+
+module.exports = {sviPredmetiProfesor,sveInfoProfesor}

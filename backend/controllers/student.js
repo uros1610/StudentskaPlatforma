@@ -132,6 +132,54 @@ const updateRezultat = (req,res) => {
 
 }
 
+const sveInfoStudent = (req, res) => {
+    const query = `
+        SELECT 
+            ime_studenta AS ime,
+            prezime_studenta AS prezime,
+            datum_rodjenja_studenta AS datumRodjenja,
+            indeks_studenta AS indeks,
+            ime_fakulteta AS imeFakulteta,
+            ime_smjera AS imeSmjera,
+            korisnickoime AS korisnickoIme 
+        FROM Student 
+        WHERE korisnickoime = ?`;
 
-module.exports = {sviStudenti,sviStudentiJedanSmjer,sviPredmetiStudenta,sviRezultatiStudenta,sviStudentiPredmet,updateRezultat,sviRezultatiStudentaJedanPredmet}
+    
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(403).json("Forbidden! No token provided.");
+    }
+
+    const token = authHeader.split(" ")[1];
+
+  
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(403).json("Forbidden! Invalid token.");
+        }
+
+        
+        const korisnickoIme = decoded.korisnickoIme;
+        
+        
+        db.query(query, [korisnickoIme], (err, results) => {
+            if (err) {
+                return res.status(500).json("Internal Server Error: " + err.message);
+            }
+
+           
+            if (results.length === 0) {
+                return res.status(404).json("Student not found");
+            }
+
+            
+            return res.status(200).json(results);
+        });
+    });
+};
+
+
+
+module.exports = {sviStudenti,sviStudentiJedanSmjer,sviPredmetiStudenta,sviRezultatiStudenta,sviStudentiPredmet,updateRezultat,sviRezultatiStudentaJedanPredmet,sveInfoStudent}
 
