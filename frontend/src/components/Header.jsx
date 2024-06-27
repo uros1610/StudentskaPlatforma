@@ -12,7 +12,7 @@ const Header = () => {
                 <nav className="header-nav header-padding-nav">
                     <Link to="/"><img src={logo} alt="Logo" id="header-logo-img" /></Link>
                     <ul>
-                        <li><Link to="/profile">{user.korisnickoIme}</Link></li>
+                        <li><Link to="/profile">{user ? user.korisnickoIme  : 'Profil'}</Link></li>
                         <li><Link to="/login">Odjavi se</Link></li>
                     </ul>
                 </nav>
