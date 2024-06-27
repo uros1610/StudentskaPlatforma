@@ -1,14 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faSquarePollVertical, faBell, faBook, faFileLines } from '@fortawesome/free-solid-svg-icons'
 import "../styles/home.css"
 import { Link } from "react-router-dom"
 import { useState,useEffect} from "react"
 import axios from "axios"
+import AuthContext from "../context/AuthContext"
 
 const Home = () => {
 
     const [brojNeprocitanih,setBrojNeprocitanih] = useState();
+    const {user} = useContext(AuthContext);
 
     const fetchBrojNeprocitanih = async () => {
         try {
@@ -48,7 +50,7 @@ const Home = () => {
                             <FontAwesomeIcon icon={faBell} className="home-icons" />
                             <h2 className="home-title">Obavještenja</h2>
                         </div>
-                        {brojNeprocitanih && <div id = "brojNeprocitanihUkupno">{brojNeprocitanih}</div>}
+                        {brojNeprocitanih > 0 && user.rola === 'Student' && <div id = "brojNeprocitanihUkupno">{brojNeprocitanih}</div>}
 
                     </Link>
                 </div>
@@ -63,7 +65,7 @@ const Home = () => {
 
                     <Link to="/grade-sheet" className="home-links">
                         <div className="home-card">
-                            <FontAwesomeIcon icon={faFileLines} className="home-icons" />
+                            <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
                             <h2 className="home-title">Matični list</h2>
                         </div>
                     </Link>
