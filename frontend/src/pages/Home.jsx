@@ -3,8 +3,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faSquarePollVertical, faBell, faBook, faFileLines } from '@fortawesome/free-solid-svg-icons'
 import "../styles/home.css"
 import { Link } from "react-router-dom"
+import { useState,useEffect} from "react"
+import axios from "axios"
 
 const Home = () => {
+
+    const [brojNeprocitanih,setBrojNeprocitanih] = useState();
+
+    const fetchBrojNeprocitanih = async () => {
+        try {
+            const response = await axios.get('/obavjestenje/brojNeprocitanihUkupno');
+            setBrojNeprocitanih(response.data[0].brojNeprocitanih);
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        fetchBrojNeprocitanih();
+    },[])
+
     return (
         <main id="home-body">
 
@@ -29,6 +48,8 @@ const Home = () => {
                             <FontAwesomeIcon icon={faBell} className="home-icons" />
                             <h2 className="home-title">Obavještenja</h2>
                         </div>
+                        {brojNeprocitanih && <div id = "brojNeprocitanihUkupno">{brojNeprocitanih}</div>}
+
                     </Link>
                 </div>
 

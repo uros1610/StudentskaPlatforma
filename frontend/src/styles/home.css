@@ -54,4 +54,22 @@
 
 .home-links {
     text-decoration: none;
+    position: relative;
+
+}
+
+#brojNeprocitanihUkupno {
+    border-radius:50%;
+    background-color: #f7941d;
+    color:#0f75bd;
+    width:35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:-10px;
+    position: absolute;
+    right: 0px;
+    z-index: 50;
+
 }
