@@ -5,11 +5,12 @@
     background-color: #0f74bd28;
     color: #0f75bd;
     font-weight: bold;
-    padding:30px 10px;
+    padding:30px 30px;
     width:50%;
     min-width: 260px;
     border-radius: 20px;
     text-decoration: none;
+    position: relative;
 }
 
 
@@ -28,6 +29,20 @@
     scale: 1;
     transition: scale 0.3s ease-in-out;
 
+
+}
+
+#brojNeprocitanihObavjestenja {
+    border-radius:50%;
+    background-color: #f7941d;
+    width:35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:-15px;
+    position: absolute;
+    right: -15px;
 
 }
 
