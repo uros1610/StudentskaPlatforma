@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const svaObavjestenjaPredmet = (req,res) => {
 
-    const q = "SELECT * FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+    const q = "SELECT * FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ? ORDER BY datum_kreiranja DESC";
 
     const {imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
@@ -127,4 +127,35 @@ const deleteObavjestenje = (req,res) => {
     })
 }
 
-module.exports = {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje,jednoObavjestenje,deleteObavjestenje}
+const brojNeprocitanih = (req,res) => {
+    const q = `SELECT COUNT(*) as brojNeprocitanih FROM Neprocitana_Obavjestenja no INNER JOIN Obavjestenje o ON no.id_obavjestenja = o.id_obavjestenja WHERE korisnickoime_studenta = ?
+    AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?
+    `
+
+    const token = req.headers.authorization.split(" ")[1];
+
+    
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+
+        db.query(q,[decoded.korisnickoIme,req.params.imePredmeta,req.params.imeSmjera,req.params.imeFakulteta],(err,data) => {
+            if(err) {
+                return res.status(500).json("Internal server error!");
+            }
+
+            return res.status(200).json(data);
+        })
+
+    })
+
+    
+}
+
+module.exports = {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje,jednoObavjestenje,deleteObavjestenje,brojNeprocitanih}
