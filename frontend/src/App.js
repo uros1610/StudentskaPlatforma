@@ -7,6 +7,7 @@ import ObavjestenjaPredmet from "./components/ObavjestenjaPredmet";
 import NovoObavjestenje from "./components/NovoObavjestenje";
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import GradeSheet from "./pages/GradeSheet";
 
 function App() {
   return (
@@ -74,6 +75,16 @@ function App() {
             <>
               <Header />
               <Profile />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/grade-sheet"
+          element={
+            <>
+              <Header />
+              <GradeSheet />
               <Footer />
             </>
           }
