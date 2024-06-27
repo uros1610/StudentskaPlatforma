@@ -10,10 +10,11 @@ const Header = () => {
         <div id="hreader-container">
             <header id="header">
                 <nav className="header-nav header-padding-nav">
-                    <Link to="/"><img src={logo} alt="Logo" id="header-logo-img" /></Link>
+                    <Link to="/home"><img src={logo} alt="Logo" id="header-logo-img" /></Link>
                     <ul>
                         <li><Link to="/profile">{user ? user.korisnickoIme : 'Profil'}</Link></li>
                         <li><span onClick={logout}>Odjavi se</span></li>
+                        
                     </ul>
                 </nav>
             </header>
