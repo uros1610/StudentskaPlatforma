@@ -11,10 +11,26 @@
     color: #0f75bd;
     width: 300px;
     min-height: 150px;
+    position: relative;
 }
 
-.jednoObavjestenje:hover {
+.jednoObavjestenje:hover{
     cursor: pointer;
+}
+
+.naslovObavjestenje {
+    padding:2px;
+    margin: 0;
+}
+
+#zvonceNeprocitano {
+    position: absolute;
+    top:-15px;
+    right:-5px;
+    color: #f7941d;
+    font-size: 30px;
+    
+    
 }
 
 .tekstObavjestenja {
@@ -40,10 +56,7 @@
     margin: 0;
 }
 
-.naslovObavjestenje {
-    padding:2px;
-    margin: 0;
-}
+
 
 #oznaciProcitano {
     margin-top: 10px;
