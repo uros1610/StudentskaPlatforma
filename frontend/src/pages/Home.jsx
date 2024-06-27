@@ -63,12 +63,14 @@ const Home = () => {
                         </div>
                     </Link>
 
-                    <Link to="/grade-sheet" className="home-links">
-                        <div className="home-card">
-                            <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
-                            <h2 className="home-title">Matični list</h2>
-                        </div>
-                    </Link>
+                    {user.rola === 'Student' && 
+                        <Link to="/grade-sheet" className="home-links">
+                            <div className="home-card">
+                                <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
+                                <h2 className="home-title">Matični list</h2>
+                            </div>
+                        </Link>
+                    }
                 </div>  
             </div>
 
