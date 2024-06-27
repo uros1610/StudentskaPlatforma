@@ -1,0 +1,58 @@
+
+.wrapperDiv {
+    min-height: 100vh;
+    background-color: #0f75bd;
+    position: relative;
+}
+
+#novoObavjestenjeDiv {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:20px;
+    width:85%;
+}
+#naslov {
+    padding:10px 10px;
+    width: 40%;
+    min-width: 200px;
+    border-radius: 20px;
+    border: none;
+}
+
+#opis {
+    padding:10px 10px;
+    width: 50%;
+    min-height: 250px;
+    min-width: 250px;
+    resize: none;
+    border-radius: 20px;
+    border: none;
+}
+
+#opis, #naslov, #opis::placeholder, #naslov::placeholder {
+    color:#0f75bd;
+}
+
+#opis:focus, #naslov:focus {
+    outline: none;
+}
+
+
+.errorPoruka {
+    font-weight: bold;
+    color: #f7941d;
+    font-size:1.6rem;
+}
+
+
+#novoObavjestenjeSpan {
+    font-size:1.6rem;
+    text-decoration: none;
+    color: inherit;
+}
