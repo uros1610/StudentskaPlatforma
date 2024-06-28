@@ -10,8 +10,8 @@ const login = (req,res) => {
 
     console.log(username,password);
 
-    const queryStudent = "SELECT * From Student WHERE korisnickoIme = ?"
-    const queryProfesor = "SELECT * FROM Profesor where korisnickoIme = ?"
+    const queryStudent = "SELECT * From Student WHERE korisnickoime = ?"
+    const queryProfesor = "SELECT * FROM Profesor where korisnickoime = ?"
 
     db.query(queryStudent,[username],(err,data) => {
         if(err) {
