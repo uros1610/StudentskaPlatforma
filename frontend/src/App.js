@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import GradeSheet from "./pages/GradeSheet";
 import InsertResults from './components/InsertResults'
 import Materials from "./pages/Materials";
+import SubjectMaterials from "./components/SubjectMaterials";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route
           path="/newNotification/:imePredmeta/:imeSmjera/:imeFakulteta"
           element={
+            
             <>
               <Header />
               <NovoObavjestenje />
@@ -109,6 +111,16 @@ function App() {
             <>
               <Header />
               <Materials />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/materials/:imePredmeta/:imeSmjera/:imeFakulteta"
+          element={
+            <>
+              <Header />
+              <SubjectMaterials />
               <Footer />
             </>
           }
