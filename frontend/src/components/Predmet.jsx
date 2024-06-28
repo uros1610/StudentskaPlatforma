@@ -12,7 +12,7 @@ const Predmet = ({imePredmeta,imeSmjera,imeFakulteta}) => {
 
   const [broj,setBroj] = useState();
 
-  const fetchData = async () => {
+  const fetchObavjestenja = async () => {
     try {
     const response = await axios.get(`/obavjestenje/brojNeprocitanih/${imePredmeta}/${imeSmjera}/${imeFakulteta}`);
     setBroj(response.data[0].brojNeprocitanih);
@@ -26,7 +26,7 @@ const Predmet = ({imePredmeta,imeSmjera,imeFakulteta}) => {
   }
 
   useEffect(() => {
-    fetchData();
+    fetchObavjestenja();
   },[])
 
   return (
