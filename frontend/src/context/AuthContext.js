@@ -23,7 +23,7 @@ export const AuthContextProvider = ({children}) => {
         console.log(resp.data)
         }
         catch(err) {
-
+            console.log(err)
         }
     }
 

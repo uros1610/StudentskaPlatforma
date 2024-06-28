@@ -1,9 +1,9 @@
-var mysql = require('mysql')
+var mysql = require('mysql2')
 
  const dbConf = mysql.createConnection({
     host:"localhost",
     user:'root',
-    password:'1234',
+    password:'root',
     database:'StudentskaPlatforma',
 })
 

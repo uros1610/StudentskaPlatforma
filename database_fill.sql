@@ -86,3 +86,5 @@ INSERT INTO Svi_Ispiti(korisnickoime_studenta,ime_predmeta,ime_smjera,ime_fakult
 ('mmarkovic','Matematika 1','Elektronika','Fakultet za elektrotehniku',75),
 ('llukic','Matematika 1','Elektronika','Fakultet za elektrotehniku',35),
 ('manic','Ekonomija','Menadžment','Ekonomski fakultet',15)
+
+select * from Profesor

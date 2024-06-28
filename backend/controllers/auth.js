@@ -10,12 +10,12 @@ const login = (req,res) => {
 
     console.log(username,password);
 
-    const queryStudent = "SELECT * From Student WHERE korisnickoIme = ?"
-    const queryProfesor = "SELECT * FROM Profesor where korisnickoIme = ?"
+    const queryStudent = "SELECT * From Student WHERE korisnickoime = ?"
+    const queryProfesor = "SELECT * FROM Profesor where korisnickoime = ?"
 
     db.query(queryStudent,[username],(err,data) => {
         if(err) {
-            return res.status(500).json("Internal server error!");
+            return res.status(500).json(err);
         }
 
         if(data.length) {
