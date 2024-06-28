@@ -6,16 +6,27 @@ import { Link } from "react-router-dom"
 import { useState,useEffect} from "react"
 import axios from "axios"
 import AuthContext from "../context/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 const Home = () => {
 
     const [brojNeprocitanih,setBrojNeprocitanih] = useState();
     const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!user) {
+            navigate('/login');
+        }
+    
+       },[])
 
     const fetchBrojNeprocitanih = async () => {
         try {
-            const response = await axios.get('/obavjestenje/brojNeprocitanihUkupno');
-            setBrojNeprocitanih(response.data[0].brojNeprocitanih);
+            if(user) {
+                const response = await axios.get('/obavjestenje/brojNeprocitanihUkupno');
+                setBrojNeprocitanih(response.data[0].brojNeprocitanih);
+            }
         }
         catch(err) {
             console.log(err);
@@ -50,7 +61,7 @@ const Home = () => {
                             <FontAwesomeIcon icon={faBell} className="home-icons" />
                             <h2 className="home-title">Obavještenja</h2>
                         </div>
-                        {brojNeprocitanih > 0 && user.rola === 'Student' && <div id = "brojNeprocitanihUkupno">{brojNeprocitanih}</div>}
+                        {brojNeprocitanih > 0 && user?.rola === 'Student' && <div id = "brojNeprocitanihUkupno">{brojNeprocitanih}</div>}
 
                     </Link>
                 </div>
@@ -63,7 +74,7 @@ const Home = () => {
                         </div>
                     </Link>
 
-                    {user.rola === 'Student' && 
+                    {user?.rola === 'Student' && 
                         <Link to="/grade-sheet" className="home-links">
                             <div className="home-card">
                                 <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
