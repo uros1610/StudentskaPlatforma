@@ -8,6 +8,7 @@ import NovoObavjestenje from "./components/NovoObavjestenje";
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import GradeSheet from "./pages/GradeSheet";
+import InsertResults from './components/InsertResults'
 
 function App() {
   return (
@@ -89,6 +90,18 @@ function App() {
             </>
           }
         />
+
+        <Route
+          path = "/insert-results/:imePredmeta/:imeSmjera/:imeFakulteta"
+          element = {
+            <>
+            <Header/>
+            <InsertResults/>
+            <Footer/>
+            </>
+          }
+        />
+
       </Routes>
     </div>
   );
