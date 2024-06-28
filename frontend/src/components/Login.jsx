@@ -12,8 +12,8 @@ import AuthContext from '../context/AuthContext'
 const Login = () => {
 
     const [data,setData] = useState({
-       korisnickoIme:"",
-       lozinka:"" 
+       password:"",
+       username:""
     })
 
     const {login} = useContext(AuthContext)
