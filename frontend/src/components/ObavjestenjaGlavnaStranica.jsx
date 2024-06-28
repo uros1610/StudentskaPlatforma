@@ -3,6 +3,8 @@ import Predmet from './Predmet';
 import AuthContext from '../context/AuthContext';
 import PredmetContext from '../context/PredmetContext';
 import styles from '../styles/obavjestenjaglavna.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const ObavjestenjaGlavnaStranica = () => {
     const { user } = useContext(AuthContext);
@@ -20,6 +22,10 @@ const ObavjestenjaGlavnaStranica = () => {
 
     return (
         <div className="sviPredmetiObavjestenja">
+            <div id='not-ttl'>
+                <FontAwesomeIcon icon={faBell} id='not-icn' />
+                <h1>Obavještenja</h1>
+            </div>
             {predmeti.map((predmet) => (
                 <Predmet
                     

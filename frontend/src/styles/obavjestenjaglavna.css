@@ -7,3 +7,18 @@
     gap:30px;
     
 }
+
+#not-ttl {
+    color: #0f75bd;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#not-icn {
+    font-size: 25px;
+    color: #0f75bd;
+}
