@@ -120,25 +120,44 @@ const sviStudentiPredmet = (req,res) => {
 
 const updateRezultat = (req,res) => {
 
-    const query = "UPDATE Rezultat SET broj_poena = ? WHERE korisnickoime_studenta = ? AND id_provjere = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+    const query = "UPDATE Rezultat SET broj_poena = ? WHERE id_provjere = ?";
 
-    const {korisnickoIme,idProvjere,imePredmeta,imeSmjera,imeFakulteta} = req.params;
+    const {idRezultat} = req.params;
 
     const brojPoena = req.body.brojPoena;
 
+    const token = req.headers.authorization.split(" ")[1];
+    
+    console.log(brojPoena,idRezultat);
 
-    db.query(query,[brojPoena,korisnickoIme,idProvjere,imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
 
-        if(err) {
-            return res.status(500).json(err);
+    if(!token) {
+        return res.status(401).json("Unauthorized!");
+    }
+
+
+    jwt.verify(token,process.env.SECRET_KEY,(err,decoded) => {
+
+        if(err || decoded.rola === 'Student') {
+            return res.status(403).json("Forbidden!");
         }
 
+       // const q = "SELECT"
 
-        if(data.affectedRows === 0) {
-            return res.status(404).json("Not found");
-        }
+        db.query(query,[brojPoena,idRezultat],(err,data) => {
 
-        return res.status(200).json("Success");
+            if(err) {
+                return res.status(500).json(err);
+            }
+
+
+            if(data.affectedRows === 0) {
+                return res.status(404).json("Not found");
+            }
+
+            return res.status(200).json("Success");
+        })
+
     })
 
 }

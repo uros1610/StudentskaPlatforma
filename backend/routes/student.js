@@ -9,7 +9,7 @@ router.get('/sviRezultati',sviRezultatiStudenta);
 router.get('/sviPredmetiStudenta',sviPredmetiStudenta);
 router.get('/:imeSmjera/:imeFakulteta',sviStudentiJedanSmjer)
 router.get('/:imePredmeta/:imeSmjera/:imeFakulteta',sviStudentiPredmet);
-router.put("/:idRezultat/:imePredmeta/:imeSmjera/:imeFakulteta",updateRezultat);
+router.put("/updateRezultat/:idRezultat",updateRezultat);
 router.get('/sveInformacijeStudent',sveInfoStudent)
 
 
