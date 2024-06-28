@@ -12,6 +12,8 @@ const sviPolozeni = (req,res) => {
 
     const limit = 5;
     const offset = (req.params.brojStranice-1)*5;
+    
+    console.log("usaoAAAAAAA");
 
     jwt.verify(token,process.env.SECRET_KEY,(err,decoded) => {
         if(err) {
@@ -19,7 +21,7 @@ const sviPolozeni = (req,res) => {
         }
         const q = `SELECT * FROM Svi_Ispiti si INNER JOIN Predmet p ON p.ime_predmeta = si.ime_predmeta 
         AND p.ime_smjera = si.ime_smjera AND
-        p.ime_fakulteta = si.ime_fakulteta WHERE korisnickoime_studenta = ? AND broj_poena >= 50 LIMIT ?,?`
+        p.ime_fakulteta = si.ime_fakulteta WHERE korisnickoime_studenta = ? AND brojPoena >= 50 LIMIT ?,?`
 
         db.query(q,[decoded.korisnickoIme,offset,limit],(err,data) => {
             if(err) {
@@ -37,7 +39,7 @@ const brojPolozenih = (req,res) => {
         return res.status(401).json("Unauthorized!");
     }
 
-    console.log("usao");
+    console.log("usaoXD");
     
 
     jwt.verify(token,process.env.SECRET_KEY,(err,decoded) => {

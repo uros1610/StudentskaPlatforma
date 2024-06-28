@@ -21,6 +21,7 @@ const GradeSheet = () => {
     const fetchPolozeni = async () => {
         try {
             const response = await axios.get(`/polozeni/${currentPage}`);
+            console.log(response);
             setPolozeni(response.data);
         }
         catch(err) {
@@ -93,7 +94,7 @@ const GradeSheet = () => {
                     {polozeni?.map((predmet) => (
                         <tr>
                             <td>{predmet.ime_predmeta}</td>
-                            <td>{izracunaj(predmet.broj_poena)}</td>
+                            <td>{izracunaj(predmet.brojPoena)}</td>
                             <td>{predmet.broj_kredita}</td>
                             <td>{predmet.broj_semestra}</td>
                         </tr>
