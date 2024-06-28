@@ -86,23 +86,34 @@ const ObavjestenjaGlavnaStranica = () => {
     return (
         
         <div className="sviPredmetiObavjestenja">
-            <select onChange={handleFakultetChange}>
-                {fakulteti.map((fakultet) => (
-                    <option value = {fakultet.imeFakulteta}>{fakultet.imeFakulteta}</option>
-                ))}
-            </select>
-            
-            <select onChange={handleSmjerChange}>
-                {smjerovi.map((smjer) => (
-                    <option value = {smjer.imeSmjera}>{smjer.imeSmjera}</option>
-                ))}
-            </select>
+
+            {user.rola === 'Profesor' && <div className = "selectDiv">
+                <select onChange={handleFakultetChange}>
+                    {fakulteti.map((fakultet) => (
+                        <option value = {fakultet.imeFakulteta}>{fakultet.imeFakulteta}</option>
+                    ))}
+                </select>
+                
+                <select onChange={handleSmjerChange}>
+                    {smjerovi.map((smjer) => (
+                        <option value = {smjer.imeSmjera}>{smjer.imeSmjera}</option>
+                    ))}
+                </select>
+            </div>}
 
             <div id='not-ttl'>
                 <FontAwesomeIcon icon={faBell} id='not-icn' />
                 <h1>Obavještenja</h1>
             </div>
-            {predmetiFiltrirani.map((predmet) => (
+            {user.rola === 'Profesor' && predmetiFiltrirani.map((predmet) => (
+                <Predmet
+                    
+                    imePredmeta={predmet.imePredmeta}
+                    imeSmjera={predmet.imeSmjera}
+                    imeFakulteta={predmet.imeFakulteta}
+                />
+            ))}
+            {user.rola === 'Student' && predmeti.map((predmet) => (
                 <Predmet
                     
                     imePredmeta={predmet.imePredmeta}
