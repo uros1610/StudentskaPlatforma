@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/materials.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
+import PredmetContext from "../context/PredmetContext";
+import AuthContext from "../context/AuthContext";
 
 const Materials = () => {
+
+    const {predmeti,fetchPredmeti} = useContext(PredmetContext);
+    const {user} = useContext(AuthContext);
+
+    useEffect(() => {
+        if(user) {
+            fetchPredmeti();
+        }
+    },[user])
+
+    useEffect(() => {
+        console.log(predmeti);
+    },[predmeti])
+
     return (
         <main id="materials-body">
             <div id="materials-h1">
@@ -13,52 +29,17 @@ const Materials = () => {
             </div>
 
             <div id="materials-cards">
-                <div className="row">
-                    <div className="materials-card">
-                        <h2 className="materials-title">Matematika 1</h2>
-                        <ul>
-                            <li><Link className="materials-description">Neki materijal</Link></li>
-                        </ul>
-                    </div>
+            {predmeti.map(predmet => (
 
-                    <div className="materials-card">
-                        <h2 className="materials-title">Matematika 2</h2>
-                        <ul>
-                            <li><Link className="materials-description">Neki materijal</Link></li>
-                        </ul>                    
-                    </div>
-
-                    <div className="materials-card">
-                        <h2 className="materials-title">Matematika 3</h2>
-                        <ul>
-                            <li><Link className="materials-description">Neki materijal</Link></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="materials-card">
-                        <h2 className="materials-title">Matematika 4</h2>
-                        <ul>
-                            <li><Link className="materials-description">Neki materijal</Link></li>
-                        </ul>
-                    </div>
-
-                    <div className="materials-card">
-                        <h2 className="materials-title">Matematika 5</h2>
-                        <ul>
-                            <li><Link className="materials-description">Neki materijal</Link></li>
-                        </ul>
-                    </div>
-
-                    <div className="materials-card">
-                        <h2 className="materials-title">Matematika 6</h2>
-                        <ul>
-                            <li><Link className="materials-description">Neki materijal</Link></li>
-                        </ul>
-                    </div>
-                </div>
+                <Link className="materials-card" to = {`/materials/${predmet.imePredmeta}/${predmet.imeSmjera}/${predmet.imeFakulteta}`}>
+                    <h2 className="materials-title">{predmet.imePredmeta}</h2>
+                    
+                </Link>       
+            ))}
             </div>
+
+            
+
         </main>
     );
 };
