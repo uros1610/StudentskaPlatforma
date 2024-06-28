@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import GradeSheet from "./pages/GradeSheet";
 import InsertResults from './components/InsertResults'
+import Materials from "./pages/Materials";
 
 function App() {
   return (
@@ -102,6 +103,16 @@ function App() {
           }
         />
 
+        <Route
+          path="/materials"
+          element={
+            <>
+              <Header />
+              <Materials />
+              <Footer />
+            </>
+          }
+        />
       </Routes>
     </div>
   );

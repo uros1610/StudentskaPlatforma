@@ -1,0 +1,89 @@
+#materials-body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#materials-h1 {
+    color: #0f75bd;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#mat-icn {
+    font-size: 25px;
+    color: #0f75bd;
+}
+
+#materials-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    gap: 50px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.materials-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    margin: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-shadow: 10px 5px 5px rgba(2, 67, 232, 0.078);
+    color: #0f75bd;
+    background-color: #0f74bd28;
+    gap: 10px;
+}
+
+.materials-card:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    scale: 1.1;
+    transition: scale 0.5s ease;
+    cursor: pointer;
+}
+
+.materials-description {
+    text-decoration: underline;
+    color: #0f75bd;
+}
+
+.materials-description:hover {
+    color: #f7941d;
+    text-decoration: none;
+}
+
+.materials-card ul {
+    list-style-type: '→';
+    color: #0f75bd;
+}
+
+.materials-card ul li {
+    color: #0f75bd;
+    padding-left: 5px;
+}
+
+.materials-card ul li:hover {
+    color: #f7941d;
+}

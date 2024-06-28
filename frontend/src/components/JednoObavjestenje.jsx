@@ -11,6 +11,8 @@ const Obavjestenje = ({ naslov, opis, id, datumKreiranja, neProcitana, setNeproc
   const navigate = useNavigate();
   const [neprocitano, setNeprocitano] = useState();
 
+  console.log(neProcitana);
+
 
   const oznaciProcitano = async (e) => {
     e.stopPropagation();
