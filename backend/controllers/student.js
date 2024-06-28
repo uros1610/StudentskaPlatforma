@@ -89,16 +89,27 @@ const sviPredmetiStudenta = (req,res) => {
     
 
 const sviStudentiPredmet = (req,res) => {
-    const query = "SELECT s.korisnickoime AS korisnickoIme, s.indeks_studenta AS indeks,s.ime_studenta AS imeStudenta,s.prezime_studenta AS prezimeStudenta FROM Pohadja p INNER JOIN Student s ON s.korisnickoime = p.korisnickoime_studenta WHERE ime_predmeta = ? AND p.ime_smjera = ? AND s.ime_fakulteta = ? "
+    const query = `SELECT s.korisnickoime AS korisnickoIme, s.indeks_studenta AS indeks,s.ime_studenta AS imeStudenta,s.prezime_studenta AS prezimeStudenta FROM Pohadja p 
+    INNER JOIN Student s ON s.korisnickoime = p.korisnickoime_studenta 
+    WHERE ime_predmeta = ? AND p.ime_smjera = ? AND s.ime_fakulteta = ?
+    AND s.indeks_studenta LIKE ? AND s.ime_studenta LIKE ? AND s.prezime_studenta LIKE ?
+    `
 
 
     const imePredmeta = req.params.imePredmeta;
     const imeSmjera = req.params.imeSmjera;
     const imeFakulteta = req.params.imeFakulteta;
 
+   
+
+    const indeks = "%" + req.query.indeks + "%";
+    const ime = "%" + req.query.imeStudenta + "%";
+    const prezime = "%" + req.query.prezimeStudenta + "%";
+
+
     console.log(req.params);
 
-    db.query(query,[imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+    db.query(query,[imePredmeta,imeSmjera,imeFakulteta,indeks,ime,prezime],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
