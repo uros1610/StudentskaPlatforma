@@ -8,6 +8,7 @@ import NovoObavjestenje from "./components/NovoObavjestenje";
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import GradeSheet from "./pages/GradeSheet";
+import Materials from "./pages/Materials";
 
 function App() {
   return (
@@ -85,6 +86,16 @@ function App() {
             <>
               <Header />
               <GradeSheet />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/materials"
+          element={
+            <>
+              <Header />
+              <Materials />
               <Footer />
             </>
           }
