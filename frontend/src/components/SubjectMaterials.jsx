@@ -16,7 +16,37 @@ const SubjectMaterials = () => {
     const {user} = useContext(AuthContext)
     const navigate = useNavigate();
 
-   
+    const handleDownload = async (fileName) => {
+        try {
+          // Make a GET request to download the file
+          const response = await axios.get(`/materijal/PreuzmiMaterijal/${fileName}`, {
+            responseType: 'blob', // Specify the response type as blob
+          });
+
+          const contentType = response.headers['content-type'] || response.headers['Content-Type'];
+      
+          // Create a Blob object from the response data
+          const blob = new Blob([response.data], { type: contentType }); // Ensure content type is 'application/pdf'
+      
+          // Create a URL for the blob
+          const url = window.URL.createObjectURL(blob);
+      
+          // Create a link element
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', fileName); // Set the download attribute to the filename
+      
+          // Append the link to the body and simulate click to trigger download
+          document.body.appendChild(link);
+          link.click();
+      
+          // Clean up: remove the link and revoke the URL object
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } catch (error) {
+          console.error('Download error:', error);
+        }
+      };
 
     useEffect(() => {
     
@@ -39,7 +69,10 @@ const SubjectMaterials = () => {
 
     const fetchMaterijali = async () => {
         try {
-            // const response = await axios.get() endpoint ovdje koji ilija napravi
+            console.log(imePredmeta,imeSmjera,imeFakulteta);
+            const response = await axios.get(`/materijal/MaterijaliPredmeta/${imePredmeta}/${imeSmjera}/${imeFakulteta}`);
+            setMaterijali(response.data);
+            console.log(response.data);
         }
         catch(err) {
             console.log(err);
@@ -49,6 +82,7 @@ const SubjectMaterials = () => {
     useEffect(() => {
         fetchMaterijali();
     },[])
+    
 
     return (
         <main id="materials-body">
@@ -56,14 +90,14 @@ const SubjectMaterials = () => {
                 <FontAwesomeIcon icon={faBook} id="mat-icn" />
                 <h1>Materijali</h1>
             </div>
-
+            
             <div id="materials-cards">
-            {predmeti.map(predmet => (
+            {materijali?.map(materijal => (
 
-                <Link className="materials-card" to = {`/materials/${predmet.imePredmeta}/${predmet.imeSmjera}/${predmet.imeFakulteta}`}>
-                    <h2 className="materials-title">{predmet.imePredmeta}</h2>
+                <div className="materials-card" onClick = {(e) => handleDownload(materijal.putanja)}>
+                    <h2 className="materials-title">{materijal.putanja}</h2>
                     
-                </Link>       
+                </div>       
             ))}
             </div>
 

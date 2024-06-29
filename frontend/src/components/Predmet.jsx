@@ -30,7 +30,7 @@ const Predmet = ({imePredmeta,imeSmjera,imeFakulteta}) => {
   },[])
 
   return (
-    <Link className = "predmetDiv" to = {`/notifications/${imePredmeta}/${imeSmjera}/${imeFakulteta}`}>
+    <Link className = "predmetDiv" to = {`/notifications/${imePredmeta}/${imeSmjera}/${imeFakulteta}/1`}>
         
         {user.rola === 'Student' && broj > 0 && 
           <div id = "brojNeprocitanihObavjestenja">
