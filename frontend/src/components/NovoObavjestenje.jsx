@@ -81,6 +81,7 @@ const NovoObavjestenje = ({type}) => {
 
     <div className = "wrapperDiv">
         <div id = "novoObavjestenjeDiv">
+            <h1 id='novo-ttl'>{imePredmeta}</h1>
 
             {error && <p className = "errorPoruka">{`${error} ne može da bude prazan!`}</p>}
 
