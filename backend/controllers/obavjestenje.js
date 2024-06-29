@@ -3,12 +3,16 @@ const jwt = require('jsonwebtoken')
 
 const svaObavjestenjaPredmet = (req,res) => {
 
-    const q = "SELECT * FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ? ORDER BY datum_kreiranja DESC";
+    const q = "SELECT * FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ? ORDER BY datum_kreiranja DESC LIMIT ?,?";
 
     const {imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
+    const limit = 6;
+    const offset = (req.params.id-1)*6;
 
-    db.query(q,[imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+
+
+    db.query(q,[imePredmeta,imeSmjera,imeFakulteta,offset,limit],(err,data) => {
         if(err) {
             return res.status(500).json("Internal server error!");
         }
@@ -160,6 +164,38 @@ const brojNeprocitanih = (req,res) => {
     
 }
 
+const brojObavjestenja = (req,res) => {
+    const q = `SELECT COUNT(*) as brojObavjestenja FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?
+    `
+
+    const token = req.headers.authorization.split(" ")[1];
+
+    console.log("usaoOVDJEEEEEEEEEEEEEEEEEEEEE");
+
+    
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+
+        db.query(q,[req.params.imePredmeta,req.params.imeSmjera,req.params.imeFakulteta],(err,data) => {
+            if(err) {
+                return res.status(500).json(err);
+            }
+
+            return res.status(200).json(data);
+        })
+
+    })
+
+    
+}
+
 
 const brojNeprocitanihUkupno = (req,res) => {
     const q = `SELECT COUNT(*) as brojNeprocitanih FROM 
@@ -202,6 +238,7 @@ const svaNeprocitanaObavjestenjaPredmet = (req,res) => {
     AND no.korisnickoime_studenta = ? ORDER BY o.datum_kreiranja DESC`;
 
     
+    
     const token = req.headers.authorization.split(" ")[1];
 
     
@@ -223,6 +260,7 @@ const svaNeprocitanaObavjestenjaPredmet = (req,res) => {
                 return res.status(500).json("Internal server error!");
             }
             else {
+                console.log(data);
                 return res.status(200).json(data);
             }
         })
@@ -257,4 +295,4 @@ const deleteNeprocitanoObavjestenje = (req,res) => {
     })
 }
 
-module.exports = {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje,jednoObavjestenje,deleteObavjestenje,brojNeprocitanih,svaNeprocitanaObavjestenjaPredmet,deleteNeprocitanoObavjestenje,brojNeprocitanihUkupno}
+module.exports = {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje,jednoObavjestenje,deleteObavjestenje,brojNeprocitanih,svaNeprocitanaObavjestenjaPredmet,deleteNeprocitanoObavjestenje,brojNeprocitanihUkupno,brojObavjestenja}
