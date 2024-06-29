@@ -37,9 +37,9 @@ exports.sviMaterijaliProfesora = (req, res) => {
 
 exports.sviMaterijaliPredmet = (req, res) => {
     
-    const {ime_predmeta} = req.body;
-    const {ime_smjera} = req.body;
-    const {ime_fakulteta} = req.body;
+    const ime_predmeta = req.params.imePredmeta;
+    const ime_smjera = req.params.imeSmjera;
+    const ime_fakulteta = req.params.imeFakulteta;
 
     const query = `SELECT putanja FROM materijal WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?`;
 
@@ -65,7 +65,7 @@ exports.sviMaterijaliPredmet = (req, res) => {
 exports.downloadMaterial = (req, res) => {
     const {ime} = req.body;
     
-    const filePath = `../public/${ime}`; // Example file path
+    const filePath = `../public/${ime}`;
 
     res.download(filePath, ime, (err) => {
       if (err) {
@@ -125,8 +125,10 @@ exports.okaciMaterijal = (req, res) => {
 
 exports.obrisiMaterijal = (req, res) => {
     const id = req.params.id;
+    const ime_fajla = req.params.imeMaterijala;
 
     const query = `DELETE FROM materijal WHERE id = ?`;
+    const filePath = '../public/'+ime_fajla;
 
     const token = req.headers.authorization.split(" ")[1];
     jwt.verify(token,process.env.SECRET_KEY,(err,data) => {

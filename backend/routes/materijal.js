@@ -6,9 +6,9 @@ const materijaliController = require('../controllers/materijal.js');
 
 router.use(fileUpload({createParentPath: true}));
 router.get('/MaterijaliProfesora', materijaliController.sviMaterijaliProfesora);
-router.get('/MaterijaliPredmeta', materijaliController.sviMaterijaliPredmet);
+router.get('/MaterijaliPredmeta/:imePredmeta/:imeSmjera/:imeFakulteta', materijaliController.sviMaterijaliPredmet);
 router.get('/PreuzmiMaterijal', materijaliController.downloadMaterial);
 router.post('/PostaviMaterijal', materijaliController.okaciMaterijal);
-router.delete('/ObrisiMaterijal/:id', materijaliController.obrisiMaterijal);
+router.delete('/ObrisiMaterijal/:id/:imeMaterijala', materijaliController.obrisiMaterijal);
 
 module.exports = router;
