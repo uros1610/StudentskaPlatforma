@@ -23,7 +23,7 @@ exports.sviMaterijaliProfesora = (req, res) => {
             
             let imena_materijala = [];
             
-            results.data.forEach(materijal => {
+            results.forEach(materijal => {
                 let ime_materijala = { id:materijal.id, putanja:materijal.putanja.split("/")[2] };
                 imena_materijala.push(ime_materijala);
             });
@@ -43,6 +43,10 @@ exports.sviMaterijaliPredmet = (req, res) => {
 
     const query = `SELECT putanja FROM materijal WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?`;
 
+    console.log(req.params);
+
+    console.log("USAO je ovdje");
+
     db.query(query, [ime_predmeta, ime_smjera, ime_fakulteta], (err,results) => {
         if (err) {
             return res.status(500).json("Internal server error!");
@@ -50,8 +54,8 @@ exports.sviMaterijaliPredmet = (req, res) => {
         
         let imena_materijala = [];
 
-        results.data.forEach(materijal => {
-            let ime_materijala = { id:materijal.id, putanja:materijal.putanja.split("/")[2] };
+        results.forEach(materijal => {
+            let ime_materijala = { id:materijal.id, putanja:materijal.putanja.split("/")[3] };
             imena_materijala.push(ime_materijala);
         });
 
@@ -63,20 +67,78 @@ exports.sviMaterijaliPredmet = (req, res) => {
 
 //pretpostavljam da na klik ide da se ovo poziva
 exports.downloadMaterial = (req, res) => {
-    const {ime} = req.body;
+    const { ime } = req.params;
+    const filePath = `./public/files/${ime}`;
     
-    const filePath = `../public/${ime}`;
-
+    // Extract the file extension
+    const ext = ime.split('.').pop(); // Get the part after the last dot
+    
+    // Determine the content type based on the file extension
+    let contentType = 'application/octet-stream'; // Default content type
+    
+    switch (ext.toLowerCase()) {
+        case 'pdf':
+            contentType = 'application/pdf';
+            break;
+        case 'txt':
+            contentType = 'text/plain';
+            break;
+        case 'jpg':
+        case 'jpeg':
+            contentType = 'image/jpeg';
+            break;
+        case 'png':
+            contentType = 'image/png';
+            break;
+        case 'gif':
+            contentType = 'image/gif';
+            break;
+        case 'mp3':
+            contentType = 'audio/mpeg';
+            break;
+        case 'mp4':
+            contentType = 'video/mp4';
+            break;
+        case 'doc':
+        case 'docx':
+            contentType = 'application/msword';
+            break;
+        case 'xls':
+        case 'xlsx':
+            contentType = 'application/vnd.ms-excel';
+            break;
+        case 'ppt':
+        case 'pptx':
+            contentType = 'application/vnd.ms-powerpoint';
+            break;
+        case 'zip':
+            contentType = 'application/zip';
+            break;
+        case 'csv':
+            contentType = 'text/csv';
+            break;
+        default:
+            // Handle unknown file types or set a generic content type
+            contentType = 'application/octet-stream';
+            break;
+    }
+    
+    
+    // Set the Content-Type header
+    res.setHeader('Content-Type', contentType);
+    
+    // Send the file as a download with the specified filename
     res.download(filePath, ime, (err) => {
-      if (err) {
-        console.error('File download error:', err);
-        res.status(404).json({ message: 'File not found', err: err });
-      } else {
-        res.status(200).json({message:'File download successful'});
-      }
+        if (err) {
+            console.error('File download error:', err);
+            return res.status(404).json({ message: 'File not found', err: err });
+        }
+        // Optionally, you can handle success response here
+        // res.status(200).json({ message: 'File download successful' });
     });
-}
+};
 
+  
 exports.okaciMaterijal = (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).json({ error: 'No materials were attatched' });
