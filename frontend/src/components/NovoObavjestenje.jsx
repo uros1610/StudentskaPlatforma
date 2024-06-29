@@ -88,7 +88,7 @@ const NovoObavjestenje = ({type}) => {
 
             <textarea id = "opis" placeholder = "Opis obavještenja" value = {opis} onInput={(e) => {setOpis(e.target.value); if(error === 'Opis') {setError("")}}}/>
 
-            <button className = "okaciObavjestenje" onClick = {klikDugme}><span id = "novoObavjestenjeSpan">{!id ? 'Okačite novo obavještenje' : 'Izmijeni obavještenje'}</span></button>
+            <button className = "okaciObavjestenje" id='novo-btn' onClick = {klikDugme}><span id = "novoObavjestenjeSpan">{!id ? 'Okačite novo obavještenje' : 'Izmijeni obavještenje'}</span></button>
 
         </div>
 

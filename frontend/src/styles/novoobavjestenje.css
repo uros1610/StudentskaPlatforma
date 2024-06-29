@@ -1,4 +1,3 @@
-
 .wrapperDiv {
     min-height: 100vh;
     background-color: #0f75bd;
@@ -50,9 +49,18 @@
     font-size:1.6rem;
 }
 
+#novo-btn {
+    border-radius:20px;
+    border: none;
+    scale:1;
+    transition: all 0.3s ease-in;
+    color:#0f75bd;
+    width: max-content;
+    padding: 10px 20px;
+}
 
-#novoObavjestenjeSpan {
-    font-size:1.6rem;
-    text-decoration: none;
-    color: inherit;
+#novo-btn:hover {
+    scale:1.1;
+    background-color: #f7941d;
+    color:white;
 }

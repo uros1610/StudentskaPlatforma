@@ -87,13 +87,13 @@ const ObavjestenjaGlavnaStranica = () => {
     return (
         
         <div className="sviPredmetiObavjestenja">
-
-            {user.rola === 'Profesor' && <DropdownMenu handleFakultetChange = {handleFakultetChange} handleSmjerChange = {handleSmjerChange} fakulteti = {fakulteti} smjerovi = {smjerovi}/>}
-
             <div id='not-ttl'>
                 <FontAwesomeIcon icon={faBell} id='not-icn' />
                 <h1>Obavještenja</h1>
             </div>
+
+            {user.rola === 'Profesor' && <DropdownMenu handleFakultetChange = {handleFakultetChange} handleSmjerChange = {handleSmjerChange} fakulteti = {fakulteti} smjerovi = {smjerovi}/>}
+
             {user.rola === 'Profesor' && predmetiFiltrirani.map((predmet) => (
                 <Predmet
                     
