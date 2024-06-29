@@ -59,8 +59,11 @@ const ObavjestenjaGlavnaStranica = () => {
 
     useEffect(() => {
         if (user) {
-            fetchFakulteti();
             fetchPredmeti();
+        }
+        if(user.rola === 'Profesor') {
+            fetchFakulteti();
+
         }
     }, [user]);
 
