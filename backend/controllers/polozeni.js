@@ -46,11 +46,11 @@ const brojPolozenih = (req,res) => {
         if(err) {
             return res.status(401).json("Unauthorized!");
         }
-        const q = "SELECT COUNT(*) AS brojPolozenih FROM Svi_Ispiti WHERE korisnickoime_studenta = ? AND broj_poena >= 50"
+        const q = "SELECT COUNT(*) AS brojPolozenih FROM Svi_Ispiti WHERE korisnickoime_studenta = ? AND brojPoena >= 50"
 
         db.query(q,[decoded.korisnickoIme],(err,data) => {
             if(err) {
-                return res.status(500).json("Internal server error!");
+                return res.status(500).json(err);
             }
             return res.status(200).json(data);
         })
