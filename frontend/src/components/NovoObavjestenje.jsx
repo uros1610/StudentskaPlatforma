@@ -36,14 +36,14 @@ const NovoObavjestenje = ({type}) => {
                 const response = await axios.post(`/obavjestenje/${predmet}/${smjer}/${fakultet}`,{opis,naslov});
 
                 alert("Obavještenje uspješno okačeno!")
-                navigate(`/notifications/${predmet}/${smjer}/${fakultet}`);
+                navigate(`/notifications/${predmet}/${smjer}/${fakultet}/1`);
 
             }
 
             else {
                 const response = await axios.put(`/obavjestenje/${id}`,{opis,naslov});
                 alert("Obavještenje uspješno izmijenjeno!");
-                navigate(`/notifications/${predmet}/${smjer}/${fakultet}`);
+                navigate(`/notifications/${predmet}/${smjer}/${fakultet}/1`);
                 
             }
 
