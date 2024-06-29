@@ -86,6 +86,10 @@ const ObavjestenjaGlavnaStranica = () => {
     return (
         
         <div className="sviPredmetiObavjestenja">
+            <div id='not-ttl'>
+                <FontAwesomeIcon icon={faBell} id='not-icn' />
+                <h1>Obavještenja</h1>
+            </div>
 
             {user.rola === 'Profesor' && <div className = "selectDiv">
                 <select onChange={handleFakultetChange}>
@@ -101,10 +105,6 @@ const ObavjestenjaGlavnaStranica = () => {
                 </select>
             </div>}
 
-            <div id='not-ttl'>
-                <FontAwesomeIcon icon={faBell} id='not-icn' />
-                <h1>Obavještenja</h1>
-            </div>
             {user.rola === 'Profesor' && predmetiFiltrirani.map((predmet) => (
                 <Predmet
                     
