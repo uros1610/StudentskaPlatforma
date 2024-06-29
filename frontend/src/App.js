@@ -31,7 +31,7 @@ function App() {
         />
 
         <Route
-          path = "/notifications/:imePredmeta/:imeSmjera/:imeFakulteta"
+          path = "/notifications/:imePredmeta/:imeSmjera/:imeFakulteta/:id"
           element={
             <>
               <Header />
