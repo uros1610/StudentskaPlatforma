@@ -10,10 +10,10 @@ router.get('/:imePredmeta/:imeSmjera/:imeFakulteta/:id',svaObavjestenjaPredmet);
 
 router.get('/brojNeprocitanihUkupno/',brojNeprocitanihUkupno);
 router.post('/:imePredmeta/:imeSmjera/:imeFakulteta',insertObavjestenje);
+router.delete('/neprocitano/:idObavjestenja',deleteNeprocitanoObavjestenje);
 router.put('/:idObavjestenja',updateObavjestenje);
 router.get('/:idObavjestenja',jednoObavjestenje);
 router.delete('/:idObavjestenja',deleteObavjestenje);
-router.delete('/neprocitano/:idObavjestenja',deleteNeprocitanoObavjestenje);
 
 
 module.exports = router;

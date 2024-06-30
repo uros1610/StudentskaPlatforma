@@ -121,10 +121,12 @@ const jednoObavjestenje = (req,res) => {
 const deleteObavjestenje = (req,res) => {
     const q = "DELETE FROM Obavjestenje WHERE id_obavjestenja = ?";
 
-    db.query(q,[req.params.idObavjestenja],(err,data) => {
+    db.query(q,[parseInt(req.params.idObavjestenja)],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
+
+        console.log(req.params);
 
         if(data.affectedRows === 0) {
             return res.status(404).json("Not found");
