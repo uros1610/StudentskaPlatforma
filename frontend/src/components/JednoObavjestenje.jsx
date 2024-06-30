@@ -5,7 +5,7 @@ import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Obavjestenje = ({ naslov, opis, id, datumKreiranja, neProcitana, setNeprocitana }) => {
+const Obavjestenje = ({ naslov, opis, id, datumKreiranja, neProcitana, setNeprocitana,obavjestenja,setObavjestenja}) => {
   const [visible, setVisible] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -19,10 +19,26 @@ const Obavjestenje = ({ naslov, opis, id, datumKreiranja, neProcitana, setNeproc
       const response = await axios.delete(`/obavjestenje/neprocitano/${id}`);
       setNeprocitano(false);
       setNeprocitana(neProcitana.filter(neprocitano => neprocitano.id_obavjestenja !== id));
+      
     } catch (err) {
       console.log(err);
     }
   };
+
+  const brisiObavjestenje = async (e) => {
+    try {
+    const response = await axios.delete(`/obavjestenje/${id}`);
+    setNeprocitana(neProcitana.filter(neprocitano => neprocitano.id_obavjestenja !== id));
+    setObavjestenja(obavjestenja.filter(obavjestenje => obavjestenje.id_obavjestenja !== id));
+
+    
+
+    }
+    catch(err) {
+      console.log(err);
+    }
+
+  }
 
   useEffect(() => {
     setNeprocitano(neProcitana.some(neprocitano => neprocitano.id_obavjestenja === id));
@@ -56,7 +72,7 @@ const Obavjestenje = ({ naslov, opis, id, datumKreiranja, neProcitana, setNeproc
             >
               Izmijeni
             </button>
-            <button id="oznaciProcitano">Izbriši</button>
+            <button id="oznaciProcitano" onClick = {(e) => { e.stopPropagation(); brisiObavjestenje()}}>Izbriši</button>
           </div>
         )}
       </div>
