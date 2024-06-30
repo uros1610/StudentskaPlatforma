@@ -37,6 +37,57 @@ const Home = () => {
         fetchBrojNeprocitanih();
     },[])
 
+    /*
+        const [file,setFile] = useState("");
+
+        
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    }
+
+
+    const attachFile = async (e) => {
+        e.preventDefault();
+        if (!file) {
+            console.log("No file selected");
+            return;
+        }
+        try {
+            const formData = new FormData();
+            formData.append('ime_predmeta', 'Matematika 1');
+            formData.append('ime_smjera', 'Elektronika');
+            formData.append('ime_fakulteta', 'Fakultet za elektrotehniku');
+            formData.append('ime_fajla', file.name);
+            formData.append('file', file);
+
+
+            const response = await axios.post('/materijal/PostaviMaterijal', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        if (file) {
+            console.log(file.name);
+        }
+    }, [file]);
+    ova logika ce da ide za insert materijala, radi zasad
+
+     {user?.rola === 'Profesor' && <div id = "uploadMaterial">
+                            <input type = 'file' id = "nameOfFile" onChange={(e) => {setFile(e.target.files[0])}}/>
+                            <button onClick={attachFile}>Klik</button>
+                        </div>}
+    */
+
+  
+
     return (
         <main id="home-body">
 
@@ -72,6 +123,8 @@ const Home = () => {
                             <FontAwesomeIcon icon={faBook} className="home-icons" />
                             <h2 className="home-title">Materijali</h2>
                         </div>
+
+                       
                     </Link>
 
                     {user?.rola === 'Student' && 
@@ -83,6 +136,8 @@ const Home = () => {
                         </Link>
                     }
                 </div>  
+
+               
             </div>
 
         </main>
