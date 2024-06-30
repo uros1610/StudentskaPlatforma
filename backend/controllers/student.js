@@ -121,6 +121,7 @@ const sviStudentiPredmet = (req,res) => {
 const updateRezultat = (req,res) => {
 
     const query = "UPDATE Rezultat SET broj_poena = ? WHERE id_provjere = ?";
+    const query2 = "SELECT * FROM Rezultat WHERE id_provjere = ?";
 
     const {idRezultat} = req.params;
 
@@ -142,7 +143,7 @@ const updateRezultat = (req,res) => {
             return res.status(403).json("Forbidden!");
         }
 
-       // const q = "SELECT"
+       
 
         db.query(query,[brojPoena,idRezultat],(err,data) => {
 
@@ -155,7 +156,31 @@ const updateRezultat = (req,res) => {
                 return res.status(404).json("Not found");
             }
 
-            return res.status(200).json("Success");
+            db.query(query2,[idRezultat],(err,data) => {
+                if(err) {
+                    return res.status(500).json(err);
+                }
+
+                const jsonFormat = data[0];
+
+                
+                const updateUkupanBrojPoena = "UPDATE Pohadja SET ukupan_broj_poena = ? WHERE korisnickoime_studenta = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
+                db.query(updateUkupanBrojPoena,[req.body.ukupanBrojPoena,jsonFormat.korisnickoime_studenta,jsonFormat.ime_predmeta,jsonFormat.ime_smjera,jsonFormat.ime_fakulteta],(err,data) => {
+                    if(err) {
+                        return res.status(500).json(err);
+                    }
+                    const updateUkupanBrojPoenaSviIspiti = "UPDATE Svi_Ispiti SET brojPoena = ? WHERE korisnickoime_studenta = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
+
+                    db.query(updateUkupanBrojPoenaSviIspiti,[req.body.ukupanBrojPoena,jsonFormat.korisnickoime_studenta,jsonFormat.ime_predmeta,jsonFormat.ime_smjera,jsonFormat.ime_fakulteta],(err,data) => {
+                        if(err) {
+                            return res.status(500).json(err);
+                        }
+                    return res.status(200).json("Success");
+                    })
+
+                })
+            })
+
         })
 
     })
