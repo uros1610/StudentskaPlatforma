@@ -8,39 +8,42 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import Pagination from './Pagination';
 
 const SubjectMaterials = () => {
 
     const {imePredmeta,imeSmjera,imeFakulteta} = useParams();
     const {predmeti,fetchPredmeti} = useContext(PredmetContext);
     const {user} = useContext(AuthContext)
+    const [ukupno,setUkupno] = useState(0);
     const navigate = useNavigate();
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const [currentPage, setCurrentPage] = useState(1);
+    const subjPerPage = 10;
 
     const handleDownload = async (fileName) => {
         try {
-          // Make a GET request to download the file
+          
           const response = await axios.get(`/materijal/PreuzmiMaterijal/${fileName}`, {
-            responseType: 'blob', // Specify the response type as blob
+            responseType: 'blob', 
           });
 
           const contentType = response.headers['content-type'] || response.headers['Content-Type'];
       
-          // Create a Blob object from the response data
-          const blob = new Blob([response.data], { type: contentType }); // Ensure content type is 'application/pdf'
+          const blob = new Blob([response.data], { type: contentType });
       
-          // Create a URL for the blob
+          
           const url = window.URL.createObjectURL(blob);
       
-          // Create a link element
+          
           const link = document.createElement('a');
           link.href = url;
-          link.setAttribute('download', fileName); // Set the download attribute to the filename
+          link.setAttribute('download', fileName);
       
-          // Append the link to the body and simulate click to trigger download
+        
           document.body.appendChild(link);
           link.click();
       
-          // Clean up: remove the link and revoke the URL object
           document.body.removeChild(link);
           window.URL.revokeObjectURL(url);
         } catch (error) {
@@ -70,8 +73,11 @@ const SubjectMaterials = () => {
     const fetchMaterijali = async () => {
         try {
             console.log(imePredmeta,imeSmjera,imeFakulteta);
-            const response = await axios.get(`/materijal/MaterijaliPredmeta/${imePredmeta}/${imeSmjera}/${imeFakulteta}`);
+            const response = await axios.get(`/materijal/MaterijaliPredmeta/${imePredmeta}/${imeSmjera}/${imeFakulteta}/${currentPage}`);
+            const response2 = await axios.get(`/materijal/UkupanBrojMaterijala/${imePredmeta}/${imeSmjera}/${imeFakulteta}`);
+            setUkupno(response2.data[0].brojMaterijala);
             setMaterijali(response.data);
+            console.log(response2.data);
             console.log(response.data);
         }
         catch(err) {
@@ -81,7 +87,7 @@ const SubjectMaterials = () => {
 
     useEffect(() => {
         fetchMaterijali();
-    },[])
+    },[currentPage])
     
 
     return (
@@ -101,7 +107,7 @@ const SubjectMaterials = () => {
             ))}
             </div>
 
-            
+        <Pagination paginate={paginate} currentPage={currentPage} totalItems={ukupno} itemsPerPage={subjPerPage}/>
 
     </main>
   )

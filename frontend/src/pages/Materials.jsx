@@ -31,7 +31,7 @@ const Materials = () => {
             <div id="materials-cards">
             {predmeti.map(predmet => (
 
-                <Link className="materials-card" to = {`/materials/${predmet.imePredmeta}/${predmet.imeSmjera}/${predmet.imeFakulteta}`}>
+                <Link className="materials-card" to = {`/materials/${predmet.imePredmeta}/${predmet.imeSmjera}/${predmet.imeFakulteta}/1`}>
                     <h2 className="materials-title">{predmet.imePredmeta}</h2>
                     
                 </Link>       
