@@ -116,7 +116,7 @@ function App() {
           }
         />
         <Route
-          path="/materials/:imePredmeta/:imeSmjera/:imeFakulteta"
+          path="/materials/:imePredmeta/:imeSmjera/:imeFakulteta/:id"
           element={
             <>
               <Header />
