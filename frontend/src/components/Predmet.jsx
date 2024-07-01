@@ -6,7 +6,7 @@ import AuthContext from '../context/AuthContext'
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
-const Predmet = ({imePredmeta,imeSmjera,imeFakulteta}) => {
+const Predmet = ({imePredmeta,imeSmjera,imeFakulteta,type}) => {
 
   const {user} = useContext(AuthContext);
 
@@ -26,20 +26,23 @@ const Predmet = ({imePredmeta,imeSmjera,imeFakulteta}) => {
   }
 
   useEffect(() => {
+    if(type === "notifications") {
     fetchObavjestenja();
+    }
+   
   },[])
 
   return (
-    <Link className = "predmetDiv" to = {`/notifications/${imePredmeta}/${imeSmjera}/${imeFakulteta}/1`}>
+    <Link className = "predmetDiv" to = { type === "notifications" ? `/${type}/${imePredmeta}/${imeSmjera}/${imeFakulteta}/1` : `/${type}/${imePredmeta}/${imeSmjera}/${imeFakulteta}`}>
         
-        {user.rola === 'Student' && broj > 0 && 
+        {user.rola === 'Student' && broj > 0 && type === "notifications" && 
           <div id = "brojNeprocitanihObavjestenja">
             {broj}
           </div>
         }
 
         <h1 className = "imePredmeta">{imePredmeta}</h1>
-        <FaBell className = "obavjestenjeIkonica"/>
+        {type === "notifications" && <FaBell className = "obavjestenjeIkonica"/>}
 
     </Link>
   )

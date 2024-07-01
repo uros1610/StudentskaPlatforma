@@ -103,6 +103,7 @@ const ObavjestenjaGlavnaStranica = () => {
                     imePredmeta={predmet.imePredmeta}
                     imeSmjera={predmet.imeSmjera}
                     imeFakulteta={predmet.imeFakulteta}
+                    type = "notifications"
                 />
             ))}
             {user.rola === 'Student' && predmeti.map((predmet) => (
@@ -111,6 +112,8 @@ const ObavjestenjaGlavnaStranica = () => {
                     imePredmeta={predmet.imePredmeta}
                     imeSmjera={predmet.imeSmjera}
                     imeFakulteta={predmet.imeFakulteta}
+                    type = "notifications"
+
                 />
             ))}
         </div>
