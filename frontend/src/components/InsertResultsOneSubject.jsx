@@ -33,10 +33,10 @@ const InsertResultsOneSubject = () => {
         setChangedResults(prevResults => {
             const studentIndex = prevResults.findIndex(result => result.studentId === studentId);
             if (studentIndex === -1) {
-                // Add new entry for the student
+               
                 return [...prevResults, { studentId, scores: { [id_provjere]: newScore } }];
             } else {
-                // Update existing entry for the student
+                
                 const updatedResults = [...prevResults];
                 updatedResults[studentIndex] = {
                     ...updatedResults[studentIndex],
@@ -62,9 +62,9 @@ const InsertResultsOneSubject = () => {
             setRezultati(data);
             const filteredData = data.filter(student => student.korisnickoime_studenta === data[0].korisnickoime_studenta);
             setSviKolokvijumi(filteredData.filter(t => t.ime_provjere === 'Kolokvijum'));
-            setSviPopravniKolokvijumi(filteredData.filter(t => t.ime_provjere === 'Popravni Kolokvijum'));
+            setSviPopravniKolokvijumi(filteredData.filter(t => t.ime_provjere === 'Popravni kolokvijum'));
             setSviZavrsni(filteredData.filter(t => t.ime_provjere === 'Ispit'));
-            setSviPopravniZavrsni(filteredData.filter(t => t.ime_provjere === 'Popravni Ispit'));
+            setSviPopravniZavrsni(filteredData.filter(t => t.ime_provjere === 'Popravni ispit'));
             setSviDomaci(filteredData.filter(t => t.ime_provjere === 'Domaci'));
         } catch (err) {
             console.log(err);
@@ -130,13 +130,57 @@ const InsertResultsOneSubject = () => {
                             <tr key={student.korisnickoIme}>
                                 <td>{student.imeStudenta} {student.prezimeStudenta}</td>
                                 <td>{student.indeks}</td>
-                                {rezultati.filter(rezultat => rezultat.korisnickoime_studenta === student.korisnickoIme).map(provjera => (
+                                {rezultati.filter(rezultat => (rezultat.korisnickoime_studenta === student.korisnickoIme && rezultat.ime_provjere === 'Domaci')).map(provjera => (
                                     <td key={provjera.id_provjere}>
                                         <input
                                             className="numberOfPoints"
                                             value={changedResults.find(result => result.studentId === student.korisnickoIme)?.scores[provjera.id_provjere] !== undefined
                                                 ? changedResults.find(result => result.studentId === student.korisnickoIme).scores[provjera.id_provjere]
-                                                : provjera.broj_poena}
+                                                : provjera.broj_poena!=-100 ? provjera.broj_poena : ''}
+                                            onChange={(e) => handleScoreChange(student.korisnickoIme, provjera.id_provjere, e.target.value)}
+                                        />
+                                    </td>
+                                ))}
+                                {rezultati.filter(rezultat => (rezultat.korisnickoime_studenta === student.korisnickoIme && rezultat.ime_provjere === 'Kolokvijum')).map(provjera => (
+                                    <td key={provjera.id_provjere}>
+                                        <input
+                                            className="numberOfPoints"
+                                            value={changedResults.find(result => result.studentId === student.korisnickoIme)?.scores[provjera.id_provjere] !== undefined
+                                                ? changedResults.find(result => result.studentId === student.korisnickoIme).scores[provjera.id_provjere]
+                                                : provjera.broj_poena!=-100 ? provjera.broj_poena : ''}
+                                            onChange={(e) => handleScoreChange(student.korisnickoIme, provjera.id_provjere, e.target.value)}
+                                        />
+                                    </td>
+                                ))}
+                                {rezultati.filter(rezultat => (rezultat.korisnickoime_studenta === student.korisnickoIme && rezultat.ime_provjere === 'Popravni kolokvijum')).map(provjera => (
+                                    <td key={provjera.id_provjere}>
+                                        <input
+                                            className="numberOfPoints"
+                                            value={changedResults.find(result => result.studentId === student.korisnickoIme)?.scores[provjera.id_provjere] !== undefined
+                                                ? changedResults.find(result => result.studentId === student.korisnickoIme).scores[provjera.id_provjere]
+                                                : provjera.broj_poena!=-100 ? provjera.broj_poena : ''}
+                                            onChange={(e) => handleScoreChange(student.korisnickoIme, provjera.id_provjere, e.target.value)}
+                                        />
+                                    </td>
+                                ))}
+                                {rezultati.filter(rezultat => (rezultat.korisnickoime_studenta === student.korisnickoIme && rezultat.ime_provjere === 'Ispit')).map(provjera => (
+                                    <td key={provjera.id_provjere}>
+                                        <input
+                                            className="numberOfPoints"
+                                            value={changedResults.find(result => result.studentId === student.korisnickoIme)?.scores[provjera.id_provjere] !== undefined
+                                                ? changedResults.find(result => result.studentId === student.korisnickoIme).scores[provjera.id_provjere]
+                                                : provjera.broj_poena!=-100 ? provjera.broj_poena : ''}
+                                            onChange={(e) => handleScoreChange(student.korisnickoIme, provjera.id_provjere, e.target.value)}
+                                        />
+                                    </td>
+                                ))}
+                                {rezultati.filter(rezultat => (rezultat.korisnickoime_studenta === student.korisnickoIme && rezultat.ime_provjere === 'Popravni ispit')).map(provjera => (
+                                    <td key={provjera.id_provjere}>
+                                        <input
+                                            className="numberOfPoints"
+                                            value={changedResults.find(result => result.studentId === student.korisnickoIme)?.scores[provjera.id_provjere] !== undefined
+                                                ? changedResults.find(result => result.studentId === student.korisnickoIme).scores[provjera.id_provjere]
+                                                : provjera.broj_poena!=-100 ? provjera.broj_poena : ''}
                                             onChange={(e) => handleScoreChange(student.korisnickoIme, provjera.id_provjere, e.target.value)}
                                         />
                                     </td>

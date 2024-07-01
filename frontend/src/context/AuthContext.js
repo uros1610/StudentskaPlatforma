@@ -7,7 +7,6 @@ const AuthContext = createContext({})
 
 export const AuthContextProvider = ({children}) => {
 
-    const URL = process.env.REACT_APP_BASE_URL;
     const navigate = useNavigate()
 
 

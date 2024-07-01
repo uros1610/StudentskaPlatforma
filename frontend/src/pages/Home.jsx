@@ -100,12 +100,14 @@ const Home = () => {
                         </div>
                     </Link>
 
-                    <Link to="/results" className="home-links">
-                        <div className="home-card">
-                            <FontAwesomeIcon icon={faSquarePollVertical} className="home-icons" />
-                            <h2 className="home-title">Pregled rezultata</h2>
-                        </div>
-                    </Link>
+                    {user?.rola === 'Student' && 
+                        <Link to="/results" className="home-links">
+                            <div className="home-card">
+                                <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
+                                <h2 className="home-title">Pregled rezultata</h2>
+                            </div>
+                        </Link>
+                    }
 
                     <Link to="/notifications" className="home-links">
                         <div className="home-card">
@@ -131,7 +133,7 @@ const Home = () => {
                         <Link to="/grade-sheet" className="home-links">
                             <div className="home-card">
                                 <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
-                                <h2 className="home-title">Matični list</h2>
+                                <h2 className="home-title">Položeni ispiti</h2>
                             </div>
                         </Link>
                     }
