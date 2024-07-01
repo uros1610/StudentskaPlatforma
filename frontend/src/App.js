@@ -8,9 +8,10 @@ import NovoObavjestenje from "./components/NovoObavjestenje";
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import GradeSheet from "./pages/GradeSheet";
-import InsertResults from './components/InsertResults'
+import InsertResults from './components/InsertResultsMainPage'
 import Materials from "./pages/Materials";
 import SubjectMaterials from "./components/SubjectMaterials";
+import InsertResultsOneSubject from "./components/InsertResultsOneSubject";
 
 function App() {
   return (
@@ -94,16 +95,29 @@ function App() {
           }
         />
 
+            <Route
+            path = "/insert-results"
+            element = {
+              <>
+              <Header/>
+              <InsertResults/>
+              <Footer/>
+              </>
+            }
+        />
+
         <Route
           path = "/insert-results/:imePredmeta/:imeSmjera/:imeFakulteta"
           element = {
             <>
             <Header/>
-            <InsertResults/>
+            <InsertResultsOneSubject/>
             <Footer/>
             </>
           }
         />
+
+         
 
         <Route
           path="/materials"
@@ -125,6 +139,9 @@ function App() {
             </>
           }
         />
+
+
+
       </Routes>
     </div>
   );
