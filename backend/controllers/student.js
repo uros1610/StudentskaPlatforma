@@ -30,7 +30,9 @@ const sviStudentiJedanSmjer = (req,res) => {
 const sviRezultatiStudenta = (req,res) => {
     const query = "SELECT * FROM Rezultat WHERE korisnickoime_studenta = ?"
 
-    const token = req.headers.authorization.split(":")[1];
+    console.log("usao");
+
+    const token = req.headers.authorization.split(" ")[1];
 
 
     jwt.verify(token,process.env.SECRET_KEY,(err,data) => {
@@ -63,7 +65,7 @@ const sviRezultatiStudentaJedanPredmet = (req,res) => {
     })
 }
 const sviPredmetiStudenta = (req,res) => {
-    const query = "SELECT ime_predmeta AS imePredmeta, ime_smjera AS imeSmjera,ime_fakulteta AS imeFakulteta FROM Pohadja WHERE korisnickoime_studenta = ?"
+    const query = "SELECT ime_predmeta AS imePredmeta, ime_smjera AS imeSmjera,ime_fakulteta AS imeFakulteta,ukupan_broj_poena AS ukupanBrojPoena FROM Pohadja WHERE korisnickoime_studenta = ?"
 
     const token = req.headers.authorization.split(" ")[1];
 
