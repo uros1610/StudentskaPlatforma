@@ -12,6 +12,7 @@ import InsertResults from './components/InsertResultsMainPage'
 import Materials from "./pages/Materials";
 import SubjectMaterials from "./components/SubjectMaterials";
 import InsertResultsOneSubject from "./components/InsertResultsOneSubject";
+import Results from "./components/Results";
 
 function App() {
   return (
@@ -94,6 +95,17 @@ function App() {
             </>
           }
         />
+
+        <Route
+          path = "/results"
+          element = {
+            <>
+            <Header />
+            <Results/>
+            <Footer />
+          </>
+          }
+          />
 
             <Route
             path = "/insert-results"
