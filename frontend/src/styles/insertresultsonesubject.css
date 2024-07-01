@@ -21,7 +21,7 @@
 }
 
 #resultsTable {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     border-collapse: collapse;
 }
@@ -100,6 +100,13 @@
 
 #searchDiv input::placeholder {
     color: white;
+}
+
+@media (max-width:500px) {
+    #wrapForResults {
+        padding: 0;
+        background-color: white;
+    }
 }
 
 
