@@ -12,7 +12,7 @@ import InsertResults from './components/InsertResultsMainPage'
 import Materials from "./pages/Materials";
 import SubjectMaterials from "./components/SubjectMaterials";
 import InsertResultsOneSubject from "./components/InsertResultsOneSubject";
-import Results from "./components/Results";
+import ResultsTest from "./components/ResultsTest";
 
 function App() {
   return (
@@ -101,7 +101,7 @@ function App() {
           element = {
             <>
             <Header />
-            <Results/>
+            <ResultsTest/>
             <Footer />
           </>
           }
