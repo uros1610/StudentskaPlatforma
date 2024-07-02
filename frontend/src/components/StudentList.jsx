@@ -16,6 +16,7 @@ const StudentList = () => {
   const [newStudent, setNewStudent] = useState({ firstName: '', lastName: '', index: '', username: '' });
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,10 +41,27 @@ const StudentList = () => {
     setStudents(students.filter((student) => student.id !== studentId));
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredStudents = students.filter(student =>
+    `${student.firstName} ${student.lastName} ${student.index} ${student.username}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="student-list">
       <h1>Spisak studenata za predmet: {subjectName}</h1>
-      <button className="add-student-button" onClick={() => setModalIsOpen(true)}>Dodaj studenta</button>
+      <div className="header-container">
+        <input
+          type="text"
+          placeholder="Pretraži studente..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
+        <button className="add-student-button" onClick={() => setModalIsOpen(true)}>Dodaj studenta</button>
+      </div>
       <div className="student-table-container">
         <table className="student-table">
           <thead>
@@ -56,7 +74,7 @@ const StudentList = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
+            {filteredStudents.map((student) => (
               <tr key={student.id}>
                 <td>{student.firstName}</td>
                 <td>{student.lastName}</td>
