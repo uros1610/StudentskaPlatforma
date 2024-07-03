@@ -65,11 +65,33 @@ const Calendar = () => {
           yearr === year && dayy === day && monthh === month
         );
       });
-
       console.log(filteredd);
 
       setFiltered(filteredd)
    }
+
+const filterByDate2 = (year,month,day) => {
+    const monthsAbbreviated = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    console.log("SSDSA",year,month,day); 
+
+    const filteredd = sveProvjere.filter((provjera) => {
+  
+    const provjeraDate = new Date(provjera.datum_odrzavanja).toString().split(" ");
+    const yearr = parseInt(provjeraDate[3]);
+    const dayy = parseInt(provjeraDate[2]);
+    const monthh = monthsAbbreviated.findIndex(monthx => provjeraDate[1] === monthx);
+
+      return (
+        yearr === year && dayy === day && monthh === month
+      );
+    });
+    console.log(filteredd.length);
+    return filteredd;
+  }
+
 
     const handleCellClick = (year, month, day) => {
       if(day === shownCell) {
@@ -149,7 +171,15 @@ const Calendar = () => {
       for (let i = 0; i < 7; i++) {
         const cloneDay = new Date(day);
           days.push(
-            <div className={`col cell ${day.getMonth() !== currentDate.getMonth() ? "disabled" : ""}`} key={day} onClick = {(e) => {handleCellClick(currentDate.getFullYear(),currentDate.getMonth(),cloneDay.getDate())}}>
+            <div className={`col cell ${day.getMonth() !== currentDate.getMonth() ? "disabled" : ""}`}
+            
+            style = {{
+              
+              border: filterByDate2(cloneDay.getFullYear(),cloneDay.getMonth(),cloneDay.getDate()).length > 0 ? ' 3px solid #f7941d' : 'none',
+
+            }}
+            
+            key={day} onClick = {(e) => {handleCellClick(cloneDay.getFullYear(),cloneDay.getMonth(),cloneDay.getDate())}}>
               <span className="number">{day.getDate()}</span>
 
               
