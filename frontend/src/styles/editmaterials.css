@@ -1,0 +1,148 @@
+#edit-materials {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.edit-header h1 {
+    color: #0f75bd;
+}
+
+.btn-add-section {
+    background-color: #f7941d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn-add-section:hover {
+    transform: scale(1.1);
+}
+
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.materials {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.material {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.material-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    width:300px;
+    height: 200px;
+    padding:10px;
+    border-radius: 20px;
+}
+
+.material-info h2 {
+    color:#0f75bd;
+}
+
+.material-comment input {
+    width: 100%;
+    padding: 5px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.section-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn-add-material {
+    background-color: #0f75bd;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 50px;
+    height: 50px;
+}
+
+.btn-add-material:hover {
+    transform: scale(1.1);
+}
+
+.btn-delete {
+    background-color: #f7941d;
+    width: 35px;
+    height: 35px;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn-delete:hover {
+    transform: scale(1.1);
+}
+
+.btn-delete-section {
+    background-color: #f7941d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 4px;
+}
+
+.btn-delete-section:hover {
+    transform: scale(1.1);
+}

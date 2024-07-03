@@ -19,7 +19,7 @@ const SubjectMaterials = () => {
     const navigate = useNavigate();
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const [currentPage, setCurrentPage] = useState(1);
-    const subjPerPage = 10;
+    const subjPerPage = 6;
 
     const handleDownload = async (fileName) => {
         try {

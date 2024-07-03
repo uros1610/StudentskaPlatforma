@@ -13,6 +13,9 @@ import Materials from "./pages/Materials";
 import SubjectMaterials from "./components/SubjectMaterials";
 import InsertResultsOneSubject from "./components/InsertResultsOneSubject";
 import ResultsTest from "./components/ResultsTest";
+import AddMaterial from "./components/AddMaterial";
+import EditMaterials from "./components/EditMaterials";
+import Calendar from "./components/Calendar";
 
 function App() {
   return (
@@ -118,6 +121,18 @@ function App() {
             }
         />
 
+       
+
+        <Route path = "/edit-materials/:imePredmeta/:imeSmjera/:imeFakulteta"
+          element = {
+            <>
+            <Header/>
+            <EditMaterials/>
+            <Footer/>
+            </>
+          }
+        />
+
         <Route
           path = "/insert-results/:imePredmeta/:imeSmjera/:imeFakulteta"
           element = {
@@ -150,6 +165,16 @@ function App() {
               <Footer />
             </>
           }
+        />
+
+        <Route path = "/calendar"
+        element = {
+          <>
+            <Header/>
+            <Calendar/>
+            <Footer/>
+          </>
+        }
         />
 
 

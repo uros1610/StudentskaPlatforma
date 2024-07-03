@@ -75,4 +75,22 @@ const insertProvjera = (req , res) => {
     })
 }
 
-module.exports = {sveProvjereDatumi,insertProvjera}
+
+const imenaProvjera = (req,res) => {
+
+    const {imePredmeta,imeSmjera,imeFakulteta} = req.params;
+    const query = "SELECT  ime_provjere FROM Tip_Provjere"
+
+    db.query(query,[imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+
+        if(err) {
+            return res.status(500).json("Internal server error!");
+        }
+        else {
+            return res.status(200).json(data);
+        }
+    })
+}
+
+
+module.exports = {sveProvjereDatumi,insertProvjera,imenaProvjera}

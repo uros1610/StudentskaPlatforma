@@ -38,6 +38,8 @@ const InsertResultsOneSubject = () => {
             } else {
                 
                 const updatedResults = [...prevResults];
+
+                if(newScore) {
                 updatedResults[studentIndex] = {
                     ...updatedResults[studentIndex],
                     scores: {
@@ -45,6 +47,7 @@ const InsertResultsOneSubject = () => {
                         [id_provjere]: newScore
                     }
                 };
+            }
                 return updatedResults;
             }
         });

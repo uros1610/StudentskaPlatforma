@@ -42,11 +42,11 @@ exports.sviMaterijaliPredmet = (req, res) => {
     const ime_fakulteta = req.params.imeFakulteta;
     const id = req.params.id;
 
-    const query = `SELECT putanja FROM materijal WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ? ORDER BY datum_kreiranja DESC LIMIT ?,?`;
+    const query = `SELECT putanja,naslov,id_materijala AS idMaterijala FROM materijal WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ? ORDER BY datum_kreiranja DESC LIMIT ?,?`;
 
     console.log(req.params);
-    const limit = 10;
-    const offset = (id-1)*10;
+    const limit = 6;
+    const offset = (id-1)*6;
 
     console.log("USAO je ovdje");
 
@@ -58,7 +58,7 @@ exports.sviMaterijaliPredmet = (req, res) => {
         let imena_materijala = [];
 
         results.forEach(materijal => {
-            let ime_materijala = { id:materijal.id, putanja:materijal.putanja.split("/")[3] };
+            let ime_materijala = { id:materijal.idMaterijala, putanja:materijal.putanja.split("/")[3],naslov:materijal.naslov};
             imena_materijala.push(ime_materijala);
         });
 
@@ -172,7 +172,7 @@ exports.okaciMaterijal = (req, res) => {
         return res.status(400).json({ error: 'No materials were attached' });
     }
 
-    const { ime_predmeta, ime_smjera, ime_fakulteta, ime_fajla } = req.body;
+    const { ime_predmeta, ime_smjera, ime_fakulteta, naslov} = req.body;
     console.log(req.body);
     const attached_file = req.files.file;
 
@@ -203,7 +203,7 @@ exports.okaciMaterijal = (req, res) => {
                 return res.status(403).json("Forbidden!");
             }
 
-            db.query(query, [data.korisnickoIme, ime_predmeta, ime_smjera, ime_fakulteta, putanja, ime_fajla,new Date()], (err, results) => {
+            db.query(query, [data.korisnickoIme, ime_predmeta, ime_smjera, ime_fakulteta, putanja, naslov,new Date()], (err, results) => {
                 if (err) {
                     return res.status(500).json(err);
                 }
@@ -232,8 +232,12 @@ exports.obrisiMaterijal = (req, res) => {
     const id = req.params.id;
     const ime_fajla = req.params.imeMaterijala;
 
-    const query = `DELETE FROM materijal WHERE id = ?`;
-    const filePath = '../public/'+ime_fajla;
+    console.log(id,ime_fajla);
+
+    const query = `DELETE FROM materijal WHERE id_materijala = ?`;
+    const filePath = './public/files/'+ime_fajla;
+
+    console.log(filePath);
 
     const token = req.headers.authorization.split(" ")[1];
     jwt.verify(token,process.env.SECRET_KEY,(err,data) => {
@@ -244,7 +248,7 @@ exports.obrisiMaterijal = (req, res) => {
         
         db.query(query,[id], (err,results) => {
             if (err) {
-                return res.status(500).json("Internal server error!");
+                return res.status(500).json(err);
             }
 
             if(results.affectedRows === 0){

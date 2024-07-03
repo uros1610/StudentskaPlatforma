@@ -7,6 +7,7 @@ import { useState,useEffect} from "react"
 import axios from "axios"
 import AuthContext from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import InsertProvjera from "../components/InsertProvjera"
 
 const Home = () => {
 
@@ -36,6 +37,8 @@ const Home = () => {
     useEffect(() => {
         fetchBrojNeprocitanih();
     },[])
+
+    const [open,setOpen] = useState();
 
     /*
         const [file,setFile] = useState("");
@@ -142,6 +145,7 @@ const Home = () => {
                
             </div>
 
+            
         </main>
     )
 }
