@@ -101,7 +101,7 @@ const SubjectMaterials = () => {
             {materijali?.map(materijal => (
 
                 <div className="materials-card" onClick = {(e) => handleDownload(materijal.putanja)}>
-                    <h2 className="materials-title">{materijal.putanja.split(".")[0]}</h2>
+                    <h2 className="materials-title">{materijal.naslov}</h2>
                     
                 </div>       
             ))}

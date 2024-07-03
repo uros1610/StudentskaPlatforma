@@ -8,7 +8,6 @@ import NovoObavjestenje from "./components/NovoObavjestenje";
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import GradeSheet from "./pages/GradeSheet";
-import InsertResults from './components/InsertResultsMainPage'
 import Materials from "./pages/Materials";
 import SubjectMaterials from "./components/SubjectMaterials";
 import InsertResultsOneSubject from "./components/InsertResultsOneSubject";
@@ -16,6 +15,7 @@ import ResultsTest from "./components/ResultsTest";
 import AddMaterial from "./components/AddMaterial";
 import EditMaterials from "./components/EditMaterials";
 import Kalendar from "./pages/Kalendar";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
   return (
@@ -110,16 +110,6 @@ function App() {
           }
           />
 
-            <Route
-            path = "/insert-results"
-            element = {
-              <>
-              <Header/>
-              <InsertResults/>
-              <Footer/>
-              </>
-            }
-        />
 
        
 
@@ -178,6 +168,17 @@ function App() {
           }
         />
 
+      <Route
+        path = '/admin-panel'
+        element = {
+          <>
+          <Header/>
+          <AdminPanel/>
+          <Footer/>
+          </>
+        }
+
+      />
 
       </Routes>
     </div>

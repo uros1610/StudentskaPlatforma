@@ -64,7 +64,6 @@ const ObavjestenjePredmet = () => {
       <div id = "glavniDivObavjestenja">
         <h1>{imePredmeta}</h1>
 
-        {user.rola === 'Profesor' && <button className = "okaciObavjestenje"><Link to = {`/newNotification/${imePredmeta}/${imeSmjera}/${imeFakulteta}`} id = "novoObavjestenjeLink">Okačite novo obavještenje</Link></button>}
 
         <div className = "obavjestenjaPredmet">
           {obavjestenja.map((obavjestenje) => <Obavjestenje obavjestenja={obavjestenja} setObavjestenja={setObavjestenja} setNeprocitana = {setNeprocitana} neProcitana = {neprocitana} naslov = {obavjestenje.naslov} opis = {obavjestenje.opis} key = {obavjestenje.id_obavjestenja} id = {obavjestenje.id_obavjestenja}   datumKreiranja = {obavjestenje.datum_kreiranja}/>)}

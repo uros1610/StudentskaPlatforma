@@ -185,7 +185,7 @@ const filterByDate2 = (year,month,day) => {
 
               {cloneDay.getDate() === shownCell && cloneDay.getMonth() === shownMonth && open &&  (
                 
-                <div className = "add-material-modal">
+                <div className = "add-material-modal" onClick={(e) => { e.stopPropagation(); setOpen(false)}}>
                   <div className = "provjere">
 
                   <button style = {{

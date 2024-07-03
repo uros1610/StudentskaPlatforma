@@ -8,81 +8,89 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import axios from 'axios';
 import DropdownMenu from './DropdownMenu';
+import { useNavigate } from 'react-router-dom';
 
 const ObavjestenjaGlavnaStranica = () => {
-    const { user } = useContext(AuthContext);
+   
+    const [fakulteti, setFakulteti] = useState([]);
+    const [smjerovi, setSmjerovi] = useState([]);
+    const [predmetiFiltrirani, setPredmetiFiltrirani] = useState([]);
     const { predmeti, fetchPredmeti } = useContext(PredmetContext);
-
-
-
-    // napomena, ovo ide samo za profesora,kad oce da kaci obavjestenja, radim ovo da bih testirao da vidim radi li upit
-    const [fakulteti,setFakulteti] = useState([]); // izvlacenje fakulteta
-    const [smjerovi,setSmjerovi] = useState([]);   // izvlacenje smjerova
-    const [predmetiFiltrirani,setPredmetiFiltrirani] = useState([]);
-
-    const [odabranFakultet,setOdabranFakultet] = useState(); // onaj koji je u dropdown-u odabran;
-    const [odabranSmjer,setOdabranSmjer] = useState();
-
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+  
+    const [odabranFakultet, setOdabranFakultet] = useState();
+    const [odabranSmjer, setOdabranSmjer] = useState();
+    const [odabranPredmet, setOdabranPredmet] = useState();
+  
+    const [open, setOpen] = useState(false);
+  
+    if (!user || user.rola === 'Student') {
+      navigate('/home');
+    }
+  
     const handleFakultetChange = (event) => {
-        setOdabranFakultet(event.target.value);
+      setOdabranFakultet(event.target.value);
     };
-
+  
     const handleSmjerChange = (event) => {
-        setOdabranSmjer(event.target.value);
+      setOdabranSmjer(event.target.value);
     };
-
+  
+    const handlePredmetChange = (event) => {
+      setOdabranPredmet(event.target.value);
+    };
+  
+    useEffect(() => {
+      if (user.rola === 'Profesor') {
+        fetchPredmeti();
+        fetchFakulteti();
+      }
+    }, [user]);
+  
     const fetchFakulteti = async () => {
-        try {
+      try {
         const response = await axios.get(`/profesor/sviFakultetiProfesora`);
         setFakulteti(response.data);
-        setOdabranFakultet(response.data[0].imeFakulteta);
-
-        }
-        
-        catch(err) {
-            console.log(err)
-        }
-    }
-
+        setOdabranFakultet(response.data[0]?.imeFakulteta);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  
     const fetchSmjerovi = async () => {
-        try {
-            const response = await axios.get(`/profesor/sviSmjeroviProfesora/${odabranFakultet}`);
-            setSmjerovi(response.data);
-            setOdabranSmjer(response.data[0].imeSmjera);
-            console.log(response);
+      try {
+        if (odabranFakultet) {
+          const response = await axios.get(`/profesor/sviSmjeroviProfesora/${odabranFakultet}`);
+          setSmjerovi(response.data);
+          setOdabranSmjer(response.data[0]?.imeSmjera);
+          console.log(response);
         }
-        catch(err) {
-            console.log(err);
-        }
-    }
-
-
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  
     useEffect(() => {
-        if (user) {
-            fetchPredmeti();
-        }
-        if(user.rola === 'Profesor') {
-            fetchFakulteti();
-
-        }
-    }, [user]);
-
-    useEffect(() => {
+      if (odabranFakultet) {
         fetchSmjerovi();
-    },[odabranFakultet])
-
+      }
+    }, [odabranFakultet]);
+  
     useEffect(() => {
-        setPredmetiFiltrirani(predmeti.filter((predmet) => predmet.imeFakulteta === odabranFakultet && predmet.imeSmjera === odabranSmjer));
-
-    },[odabranSmjer])
-
-    useEffect(() => {
-        console.log(odabranSmjer,odabranFakultet);
-        console.log(predmetiFiltrirani);
-    },[predmetiFiltrirani])
+      const filtrirani = predmeti.filter(
+        (predmet) => predmet.imeFakulteta === odabranFakultet && predmet.imeSmjera === odabranSmjer
+      );
+      setPredmetiFiltrirani(filtrirani);
+      console.log(filtrirani);
+      if (filtrirani.length > 0) {
+        setOdabranPredmet(filtrirani[0].imePredmeta);
+      } else {
+        setOdabranPredmet(null);
+      }
+    }, [odabranSmjer, predmeti]);
 
     
-
     if (!user) {
         return <div>Please log in to see the notifications.</div>;
     }
@@ -95,7 +103,7 @@ const ObavjestenjaGlavnaStranica = () => {
                 <h1>Obavještenja</h1>
             </div>
 
-            {user.rola === 'Profesor' && <DropdownMenu handleFakultetChange = {handleFakultetChange} handleSmjerChange = {handleSmjerChange} fakulteti = {fakulteti} smjerovi = {smjerovi}/>}
+            {user.rola === 'Profesor' && <DropdownMenu handleFakultetChange = {handleFakultetChange} handleSmjerChange = {handleSmjerChange} fakulteti = {fakulteti} smjerovi = {smjerovi} predmeti={predmetiFiltrirani} handlePredmetChange={handlePredmetChange} type = "test"/>}
 
             {user.rola === 'Profesor' && predmetiFiltrirani.map((predmet) => (
                 <Predmet

@@ -33,6 +33,7 @@ const insertProvjera = (req , res) => {
         } 
         const query = "SELECT * FROM Profesor_predmet WHERE korisnickoime_profesora = ? AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?"
 
+        console.log(decoded.korisnickoIme,imePredmeta,imeSmjera,imeFakulteta)
         db.query(query,[decoded.korisnickoIme,imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
             if(err) {
                 return res.status(500).json(err);

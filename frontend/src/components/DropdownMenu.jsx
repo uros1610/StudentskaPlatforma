@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DropdownMenu = ({fakulteti,smjerovi,handleSmjerChange,handleFakultetChange}) => {
+const DropdownMenu = ({fakulteti,smjerovi,handleSmjerChange,handleFakultetChange,handlePredmetChange,predmeti,type}) => {
   return (
     <div className = "selectDiv">
                 <select onChange={handleFakultetChange}>
@@ -14,6 +14,13 @@ const DropdownMenu = ({fakulteti,smjerovi,handleSmjerChange,handleFakultetChange
                         <option value = {smjer.imeSmjera}>{smjer.imeSmjera}</option>
                     ))}
                 </select>
+
+                {!type && <select onChange={handlePredmetChange}>
+                    {predmeti.map((predmet) => (
+                        <option value = {predmet.imePredmeta}>{predmet.imePredmeta}</option>
+                    ))}
+                </select>}
+                
             </div>
   )
 }

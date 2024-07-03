@@ -140,6 +140,16 @@ const Home = () => {
                             </div>
                         </Link>
                     }
+
+                    {user?.rola === 'Profesor' && 
+                        <Link to="/admin-panel" className="home-links">
+                            <div className="home-card">
+                                <FontAwesomeIcon icon={faFileLines} className="home-icons"/>
+                                <h2 className="home-title">Admin panel</h2>
+                            </div>
+                        </Link>
+                    }
+
                 </div>  
 
                

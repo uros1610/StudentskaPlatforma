@@ -4,13 +4,12 @@ import axios from 'axios';
 import React, { useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom';
 
-const InsertProvjera = ({open,setOpen}) => {
+const InsertProvjera = ({open,setOpen,imePredmeta,imeSmjera,imeFakulteta}) => {
 
     const [sviTipovi,setSviTipovi] = useState([]);
     const [odabran,setOdabran] = useState();
 
     const [dateTime, setDateTime] = useState('');
-    const {imePredmeta,imeSmjera,imeFakulteta} = useParams();
 
     const handleDateTimeChange = (e) => {
         setDateTime(e.target.value);
@@ -65,8 +64,8 @@ const InsertProvjera = ({open,setOpen}) => {
 
             <button style = {{
                     position:'absolute',
-                    top:'0px',
-                    right:'3px',
+                    top:'5px',
+                    right:'5px',
                     borderRadius:'2px',
                     backgroundColor:'transparent',
                     border:'none',
@@ -88,7 +87,7 @@ const InsertProvjera = ({open,setOpen}) => {
                     {sviTipovi.map(tip => <option value = {tip.ime_provjere}>{tip.ime_provjere}</option>)}
                 </select>
 
-                <input type="datetime-local" onChange={handleDateTimeChange} value={dateTime} />
+                <div> Datum odrzavanja: <input type="datetime-local" onChange={handleDateTimeChange} value={dateTime}/></div>
 
                 <button className = "btn-add-material" onClick={addProvjera}><FontAwesomeIcon icon={faPlus}/></button>
                 </div>
