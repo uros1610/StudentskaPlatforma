@@ -25,9 +25,7 @@ const ObavjestenjaGlavnaStranica = () => {
   
     const [open, setOpen] = useState(false);
   
-    if (!user || user.rola === 'Student') {
-      navigate('/home');
-    }
+    
   
     const handleFakultetChange = (event) => {
       setOdabranFakultet(event.target.value);
@@ -46,6 +44,8 @@ const ObavjestenjaGlavnaStranica = () => {
         fetchPredmeti();
         fetchFakulteti();
       }
+
+      
     }, [user]);
   
     const fetchFakulteti = async () => {
