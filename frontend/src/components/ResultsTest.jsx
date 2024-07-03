@@ -77,10 +77,12 @@ const ResultsTest = () => {
     <div style = {{
         display:'flex',
         flexDirection:'column',
-            alignItems:'center',
-        justifyContent:'center'
+         alignItems:'center',
+        justifyContent:'center',
+        marginBottom:'50px'
 
     }}>
+        
         {predmeti.map(predmet => (
 
             

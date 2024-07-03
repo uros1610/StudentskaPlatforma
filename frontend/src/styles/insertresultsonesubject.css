@@ -18,7 +18,8 @@
     background-color: white;
     border-radius: 20px;
     width: 100%;
-    min-height: 100vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #resultsTable {
