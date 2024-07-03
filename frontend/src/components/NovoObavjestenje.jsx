@@ -22,14 +22,16 @@ const NovoObavjestenje = ({type}) => {
 
     const klikDugme = async () => {
 
-        if(!opis) {
-            setError("Opis");
-            return;
-        }
         if(!naslov) {
             setError("Naslov");
             return;
         }
+
+        if(!opis) {
+            setError("Opis");
+            return;
+        }
+        
 
         try {
             if(!id) {

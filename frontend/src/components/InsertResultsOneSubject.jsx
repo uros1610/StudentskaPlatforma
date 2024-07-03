@@ -109,6 +109,7 @@ const InsertResultsOneSubject = () => {
 
     return (
         <div id = "wrapForResults">
+            <h1>Upis rezultata</h1>
             <div id="mainDivForResults">
                 <div id="searchDiv">
                     <input id="indeks" placeholder="Indeks" onChange={handleChange} value={filter.indeks} />

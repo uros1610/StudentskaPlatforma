@@ -79,7 +79,7 @@ const GradeSheet = () => {
 
             <div id="grade-title">
                 <FontAwesomeIcon icon={faFileLines} id="grade-icn" />
-                <h1>Matični list</h1>
+                <h1>Položeni ispiti</h1>
             </div>
             <table id="grade-table">
                 <thead>

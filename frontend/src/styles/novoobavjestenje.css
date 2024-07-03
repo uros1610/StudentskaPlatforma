@@ -1,12 +1,11 @@
 .wrapperDiv {
     border-top: 5px solid white;
     min-height: 100vh;
-    background-color: #0f75bd;
     position: relative;
 }
 
 #novo-ttl {
-    color: #f7941d;
+    color: #0f75bd;
     font-size: 2.5rem;
     text-align: center;
     padding: 20px 0;
@@ -30,7 +29,7 @@
     width: 40%;
     min-width: 200px;
     border-radius: 20px;
-    border: none;
+    border: 2px solid #0f75bd
 }
 
 #opis {
@@ -40,7 +39,8 @@
     min-width: 250px;
     resize: none;
     border-radius: 20px;
-    border: none;
+    border: 2px solid #0f75bd
+
 }
 
 #opis, #naslov, #opis::placeholder, #naslov::placeholder {
@@ -54,7 +54,7 @@
 
 .errorPoruka {
     font-weight: bold;
-    color: #f7941d;
+    color: #0f75bd;
     font-size:1.6rem;
 }
 

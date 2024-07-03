@@ -6,6 +6,11 @@
     justify-content: center;
     width:100%;
     background-color: rgb(240,240,240);
+    flex-direction: column;
+}
+
+#wrapForResults h1 {
+    color:#0f75bd;
 }
 
 #mainDivForResults {
