@@ -8,8 +8,10 @@ const login = (req,res) => {
 
     const {username,password} = req.body;
 
-    const queryStudent = "SELECT * From Student WHERE korisnickoIme = ?"
-    const queryProfesor = "SELECT * FROM Profesor where korisnickoIme = ?"
+    console.log(username,password);
+
+    const queryStudent = "SELECT * From Student WHERE korisnickoime = ?"
+    const queryProfesor = "SELECT * FROM Profesor where korisnickoime = ?"
 
     db.query(queryStudent,[username],(err,data) => {
         if(err) {
@@ -17,6 +19,7 @@ const login = (req,res) => {
         }
 
         if(data.length) {
+            console.log("usao");
         const correctPassword = bcrypt.compareSync(password,data[0].lozinka);
 
             if(correctPassword) {

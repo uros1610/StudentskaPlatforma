@@ -1,5 +1,6 @@
 
 .jednoObavjestenje {
+    box-sizing: border-box;
     display: flex;
     background-color: white;
     flex-direction: column;
@@ -11,10 +12,26 @@
     color: #0f75bd;
     width: 300px;
     min-height: 150px;
+    position: relative;
 }
 
-.jednoObavjestenje:hover {
+.jednoObavjestenje:hover{
     cursor: pointer;
+}
+
+.naslovObavjestenje {
+    padding:2px;
+    margin: 0;
+}
+
+#zvonceNeprocitano {
+    position: absolute;
+    top:-15px;
+    right:-5px;
+    color: #f7941d;
+    font-size: 30px;
+    
+    
 }
 
 .tekstObavjestenja {
@@ -31,7 +48,7 @@
 }
 
 .tekstObavjestenja.visible {
-    max-height: 200px; 
+    max-height: 2000px; 
     padding: 0.5rem;
 }
 
@@ -40,10 +57,7 @@
     margin: 0;
 }
 
-.naslovObavjestenje {
-    padding:2px;
-    margin: 0;
-}
+
 
 #oznaciProcitano {
     margin-top: 10px;

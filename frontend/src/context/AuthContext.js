@@ -7,7 +7,6 @@ const AuthContext = createContext({})
 
 export const AuthContextProvider = ({children}) => {
 
-    const URL = process.env.REACT_APP_BASE_URL;
     const navigate = useNavigate()
 
 
@@ -28,10 +27,16 @@ export const AuthContextProvider = ({children}) => {
     }
 
     const logout = async () => {
-        const resp = await axios.post(`/auth/logout`)
+
+        try {
+        console.log("USAO ovdje");
         setuser(null)
         localStorage.removeItem('token')
         navigate('/login')
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
 
     useEffect(() => {

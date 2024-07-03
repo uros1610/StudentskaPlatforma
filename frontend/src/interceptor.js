@@ -17,7 +17,7 @@ export default function setupInterceptors(){
         }
 
         
-        return Promise.reject(error);
+       return Promise.reject(error);
     });
 
     axios.interceptors.request.use(

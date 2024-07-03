@@ -22,28 +22,30 @@ const NovoObavjestenje = ({type}) => {
 
     const klikDugme = async () => {
 
-        if(!opis) {
-            setError("Opis");
-            return;
-        }
         if(!naslov) {
             setError("Naslov");
             return;
         }
+
+        if(!opis) {
+            setError("Opis");
+            return;
+        }
+        
 
         try {
             if(!id) {
                 const response = await axios.post(`/obavjestenje/${predmet}/${smjer}/${fakultet}`,{opis,naslov});
 
                 alert("Obavještenje uspješno okačeno!")
-                navigate(`/notifications/${predmet}/${smjer}/${fakultet}`);
+                navigate(`/notifications/${predmet}/${smjer}/${fakultet}/1`);
 
             }
 
             else {
                 const response = await axios.put(`/obavjestenje/${id}`,{opis,naslov});
                 alert("Obavještenje uspješno izmijenjeno!");
-                navigate(`/notifications/${predmet}/${smjer}/${fakultet}`);
+                navigate(`/notifications/${predmet}/${smjer}/${fakultet}/1`);
                 
             }
 
@@ -81,6 +83,7 @@ const NovoObavjestenje = ({type}) => {
 
     <div className = "wrapperDiv">
         <div id = "novoObavjestenjeDiv">
+            <h1 id='novo-ttl'>{imePredmeta}</h1>
 
             {error && <p className = "errorPoruka">{`${error} ne može da bude prazan!`}</p>}
 
@@ -88,7 +91,7 @@ const NovoObavjestenje = ({type}) => {
 
             <textarea id = "opis" placeholder = "Opis obavještenja" value = {opis} onInput={(e) => {setOpis(e.target.value); if(error === 'Opis') {setError("")}}}/>
 
-            <button className = "okaciObavjestenje" onClick = {klikDugme}><span id = "novoObavjestenjeSpan">{!id ? 'Okačite novo obavještenje' : 'Izmijeni obavještenje'}</span></button>
+            <button className = "okaciObavjestenje" id='novo-btn' onClick = {klikDugme}><span id = "novoObavjestenjeSpan">{!id ? 'Okačite novo obavještenje' : 'Izmijeni obavještenje'}</span></button>
 
         </div>
 

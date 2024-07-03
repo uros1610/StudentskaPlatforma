@@ -1,32 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom'; 
+import { BrowserRouter as Router } from 'react-router-dom';
 import setupInterceptors from './interceptor';
 import { AuthContextProvider } from './context/AuthContext';
 import { PredmetContextProvider } from './context/PredmetContext';
 
-
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
 setupInterceptors();
 
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-  <Router>
-  <AuthContextProvider>
-    <PredmetContextProvider>
-
-  <App />
-  
-  </PredmetContextProvider>
-  </AuthContextProvider>
-  
-
-  </Router>
-  
-</React.StrictMode>
+    <Router>
+      <AuthContextProvider>
+        <PredmetContextProvider>
+          <App />
+        </PredmetContextProvider>
+      </AuthContextProvider>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-

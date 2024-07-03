@@ -3,12 +3,16 @@ const jwt = require('jsonwebtoken')
 
 const svaObavjestenjaPredmet = (req,res) => {
 
-    const q = "SELECT * FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?";
+    const q = "SELECT * FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ? ORDER BY datum_kreiranja DESC LIMIT ?,?";
 
     const {imePredmeta,imeSmjera,imeFakulteta} = req.params;
 
+    const limit = 6;
+    const offset = (req.params.id-1)*6;
 
-    db.query(q,[imePredmeta,imeSmjera,imeFakulteta],(err,data) => {
+
+
+    db.query(q,[imePredmeta,imeSmjera,imeFakulteta,offset,limit],(err,data) => {
         if(err) {
             return res.status(500).json("Internal server error!");
         }
@@ -63,6 +67,8 @@ const updateObavjestenje = (req,res) => {
 
     const token = req.headers.authorization.split(" ")[1];
 
+    console.log(req.params);
+
     
 
     if(!token) {
@@ -115,10 +121,12 @@ const jednoObavjestenje = (req,res) => {
 const deleteObavjestenje = (req,res) => {
     const q = "DELETE FROM Obavjestenje WHERE id_obavjestenja = ?";
 
-    db.query(q,[req.params.id],(err,data) => {
+    db.query(q,[parseInt(req.params.idObavjestenja)],(err,data) => {
         if(err) {
             return res.status(500).json(err);
         }
+
+        console.log(req.params);
 
         if(data.affectedRows === 0) {
             return res.status(404).json("Not found");
@@ -127,4 +135,166 @@ const deleteObavjestenje = (req,res) => {
     })
 }
 
-module.exports = {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje,jednoObavjestenje,deleteObavjestenje}
+const brojNeprocitanih = (req,res) => {
+    const q = `SELECT COUNT(*) as brojNeprocitanih FROM Neprocitano_Obavjestenje no INNER JOIN Obavjestenje o ON no.id_obavjestenja = o.id_obavjestenja WHERE korisnickoime_studenta = ?
+    AND ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?
+    `
+
+    const token = req.headers.authorization.split(" ")[1];
+
+    
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+
+        db.query(q,[decoded.korisnickoIme,req.params.imePredmeta,req.params.imeSmjera,req.params.imeFakulteta],(err,data) => {
+            if(err) {
+                return res.status(500).json("Internal server error!");
+            }
+
+            return res.status(200).json(data);
+        })
+
+    })
+
+    
+}
+
+const brojObavjestenja = (req,res) => {
+    const q = `SELECT COUNT(*) as brojObavjestenja FROM Obavjestenje WHERE ime_predmeta = ? AND ime_smjera = ? AND ime_fakulteta = ?
+    `
+
+    const token = req.headers.authorization.split(" ")[1];
+
+    console.log("usaoOVDJEEEEEEEEEEEEEEEEEEEEE");
+
+    
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+
+        db.query(q,[req.params.imePredmeta,req.params.imeSmjera,req.params.imeFakulteta],(err,data) => {
+            if(err) {
+                return res.status(500).json(err);
+            }
+
+            return res.status(200).json(data);
+        })
+
+    })
+
+    
+}
+
+
+const brojNeprocitanihUkupno = (req,res) => {
+    const q = `SELECT COUNT(*) as brojNeprocitanih FROM 
+    Neprocitano_Obavjestenje no INNER JOIN Obavjestenje o ON no.id_obavjestenja = o.id_obavjestenja 
+    WHERE korisnickoime_studenta = ?
+
+    `
+
+    const token = req.headers.authorization.split(" ")[1];
+
+    
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+
+        db.query(q,[decoded.korisnickoIme],(err,data) => {
+            if(err) {
+                return res.status(500).json("Internal server error!");
+            }
+
+            return res.status(200).json(data);
+        })
+
+    })
+
+    
+}
+
+const svaNeprocitanaObavjestenjaPredmet = (req,res) => {
+
+    const q = `SELECT * FROM Neprocitano_Obavjestenje no 
+    INNER JOIN Obavjestenje o ON no.id_obavjestenja = o.id_obavjestenja
+     WHERE o.ime_predmeta = ? AND o.ime_smjera = ? AND o.ime_fakulteta = ?
+    AND no.korisnickoime_studenta = ? ORDER BY o.datum_kreiranja DESC`;
+
+    
+    
+    const token = req.headers.authorization.split(" ")[1];
+
+    
+    
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+        const {imePredmeta,imeSmjera,imeFakulteta} = req.params;
+
+
+        db.query(q,[imePredmeta,imeSmjera,imeFakulteta,decoded.korisnickoIme],(err,data) => {
+            if(err) {
+                return res.status(500).json("Internal server error!");
+            }
+            else {
+                console.log(data);
+                return res.status(200).json(data);
+            }
+        })
+
+    })
+}
+
+const deleteNeprocitanoObavjestenje = (req,res) => {
+    const q = "DELETE FROM Neprocitano_Obavjestenje WHERE id_obavjestenja = ? AND korisnickoime_studenta = ? ";
+
+    const token = req.headers.authorization.split(" ")[1];
+
+    if(!token) {
+        return res.status(401).json("Access denied!");
+    }
+
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json("Unauthorized: Invalid token!");
+        }
+
+        db.query(q,[req.params.idObavjestenja,decoded.korisnickoIme],(err,data) => {
+            if(err) {
+                return res.status(500).json(err);
+            }
+
+            if(data.affectedRows === 0) {
+                return res.status(404).json("Not found");
+            }
+            return res.status(200).json("Success");
+        })
+    })
+}
+
+module.exports = {svaObavjestenjaPredmet,insertObavjestenje,updateObavjestenje,jednoObavjestenje,deleteObavjestenje,brojNeprocitanih,svaNeprocitanaObavjestenjaPredmet,deleteNeprocitanoObavjestenje,brojNeprocitanihUkupno,brojObavjestenja}

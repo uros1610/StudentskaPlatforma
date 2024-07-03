@@ -1,0 +1,101 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 16px auto;
+}
+
+.calendar>* {
+  width: 100%;
+}
+  
+.header-cal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #0F75BD;
+  color: white;
+}
+
+.days {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  align-items: center;
+  color:  #f7941d;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.calendarRow {
+  display: flex;
+  height: 80px;
+}
+
+.col {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+}
+
+.col-start, .col-end {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.col-end .icon {
+  text-align: right;
+}
+
+.col-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+}
+
+.cell {
+  /* min-height: 80px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin:1px;
+}
+
+.cell.disabled {
+  color: #ccc;
+}
+
+.cell span {
+  display: block;
+  text-align: center;
+}
+
+.provjere {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  flex-direction: column;
+  background-color: white;
+  padding:50px;
+  font-size: 1.6rem;
+}
+  
+.provjere p {
+  color:#0F75BD;
+}

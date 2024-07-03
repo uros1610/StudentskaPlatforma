@@ -1,39 +1,41 @@
-
 #glavniDivObavjestenja {
     padding:30px 30px;
-    background-color: #0f75bd;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:50px;
+    gap:30px;
+}
+
+#glavniDivObavjestenja h1 {
+    color: #0f75bd;
+}
+
+.not-body {
+    background-color: white;
 }
 
 .okaciObavjestenje {
-    padding:10px 20px;
     border-radius:20px;
     border: none;
     scale:1;
     transition: all 0.3s ease-in;
     color:#0f75bd;
-
+    width: max-content;
+    padding: 10px 20px;
 }
 
 .okaciObavjestenje:hover {
     scale:1.1;
     background-color: #f7941d;
     color:white;
-
 }
 
 #novoObavjestenjeLink {
-    font-size:2rem;
     text-decoration: none;
     color: inherit;
-
+    font-size: 16px;
 }
-
-
 
 #novoObavjestenjeLink:visited {
     color: inherit;
@@ -43,10 +45,18 @@
 .obavjestenjaPredmet {
     background-color: #0f75bd;
     display: flex;
-    min-height: 100vh;
-    align-items: flex-start;
+    /* min-height: 100vh; */
+    /* align-items: flex-start; */
     justify-content: center;
     flex-wrap: wrap;
-    padding:10px 10px;
+    padding:50px;
+    border-radius: 20px;
     gap:50px;
+}
+
+#zvonceNeprocitano {
+    background-color: #f7941d;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
 }
