@@ -17,6 +17,7 @@ const Calendar = () => {
     const [shownCell,setShownCell] = useState();
     const [filtered,setFiltered] = useState([]);
     const [open,setOpen] = useState(false);
+    const [shownMonth,setShownMonth] = useState();
 
 
     const fetchProvjere = async () => {
@@ -94,9 +95,10 @@ const filterByDate2 = (year,month,day) => {
 
 
     const handleCellClick = (year, month, day) => {
-     
+      setOpen(true);
       filterByDate(year,month,day);
       setShownCell(day);
+      setShownMonth(month);
   
     };
 
@@ -181,7 +183,7 @@ const filterByDate2 = (year,month,day) => {
 
               
 
-              {cloneDay.getDate() === shownCell && (
+              {cloneDay.getDate() === shownCell && cloneDay.getMonth() === shownMonth && open &&  (
                 
                 <div className = "add-material-modal">
                   <div className = "provjere">
@@ -195,7 +197,7 @@ const filterByDate2 = (year,month,day) => {
                     border:'none',
                     color:'#0f75bd'
                     
-                }} onClick={(e) => {setOpen(false)}}><FontAwesomeIcon icon = {faClose}/></button>
+                }} onClick={(e) => { e.stopPropagation(); console.log(open); setOpen(false)}}><FontAwesomeIcon icon = {faClose}/></button>
 
                     { filtered.length > 0 && filtered.map(filter => (
                       
