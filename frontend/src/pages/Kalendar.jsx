@@ -94,10 +94,7 @@ const filterByDate2 = (year,month,day) => {
 
 
     const handleCellClick = (year, month, day) => {
-      if(day === shownCell) {
-        setShownCell(-1);
-        return;
-      }
+     
       filterByDate(year,month,day);
       setShownCell(day);
   
