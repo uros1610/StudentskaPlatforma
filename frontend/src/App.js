@@ -13,6 +13,7 @@ import Materials from "./pages/Materials";
 import SubjectMaterials from "./components/SubjectMaterials";
 import InsertResultsOneSubject from "./components/InsertResultsOneSubject";
 import ResultsTest from "./components/ResultsTest";
+import Kalendar from "./pages/Kalendar";
 
 function App() {
   return (
@@ -151,7 +152,16 @@ function App() {
             </>
           }
         />
-
+      <Route
+          path="/calendar"
+          element={
+            <>
+              <Header />
+              <Kalendar />
+              <Footer />
+            </>
+          }
+        />
 
 
       </Routes>
