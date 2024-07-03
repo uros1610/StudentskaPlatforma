@@ -16,6 +16,7 @@ import ResultsTest from "./components/ResultsTest";
 import AddMaterial from "./components/AddMaterial";
 import EditMaterials from "./components/EditMaterials";
 import Calendar from "./components/Calendar";
+import Kalendar from "./pages/Kalendar";
 
 function App() {
   return (
@@ -176,7 +177,16 @@ function App() {
           </>
         }
         />
-
+      <Route
+          path="/calendar"
+          element={
+            <>
+              <Header />
+              <Kalendar />
+              <Footer />
+            </>
+          }
+        />
 
 
       </Routes>
