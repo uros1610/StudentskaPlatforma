@@ -29,7 +29,35 @@ const Calendar = () => {
             const responses = await Promise.all(promises);
             const allProvjere = responses.flatMap(response => response.data);
 
-            setSveProvjere(allProvjere);
+            console.log(allProvjere);
+
+            const groupedProvjere = allProvjere.reduce((acc, provjera) => {
+              const { ime_predmeta, ime_smjera, ime_fakulteta, ime_provjere } = provjera;
+              const key = `${ime_predmeta}_${ime_smjera}_${ime_fakulteta}_${ime_provjere}`;
+  
+              if (!acc[key]) {
+                  acc[key] = [];
+              }
+              acc[key].push(provjera);
+  
+              return acc;
+          }, {});
+          
+          console.log(groupedProvjere);
+
+          const groupedProvjereArray = Object.values(groupedProvjere);
+          var sveOpet = [];
+
+          groupedProvjereArray.forEach(singleGroup => {
+              singleGroup.forEach((element,index) => {
+                  const obj = {...element,ime_provjere:`${element.ime_provjere} ${index+1}`}
+                  sveOpet.push(obj);
+              })
+          })
+
+          console.log(sveOpet);
+
+            setSveProvjere(sveOpet);
         } catch (err) {
             console.log(err);
         }
@@ -66,7 +94,6 @@ const Calendar = () => {
           yearr === year && dayy === day && monthh === month
         );
       });
-      console.log(filteredd);
 
       setFiltered(filteredd)
    }
@@ -76,7 +103,6 @@ const filterByDate2 = (year,month,day) => {
             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    console.log("SSDSA",year,month,day); 
 
     const filteredd = sveProvjere.filter((provjera) => {
   
@@ -89,7 +115,6 @@ const filterByDate2 = (year,month,day) => {
         yearr === year && dayy === day && monthh === month
       );
     });
-    console.log(filteredd.length);
     return filteredd;
   }
 
@@ -102,9 +127,7 @@ const filterByDate2 = (year,month,day) => {
   
     };
 
-    useEffect(() => {
-      console.log("ovdje");
-    },[shownCell])
+    
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
