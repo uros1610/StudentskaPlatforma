@@ -8,6 +8,7 @@ import axios from "axios"
 import AuthContext from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import InsertProvjera from "../components/InsertProvjera"
+import { faRobot } from '@fortawesome/free-solid-svg-icons'
 
 const Home = () => {
 
@@ -150,6 +151,12 @@ const Home = () => {
                         </Link>
                     }
 
+                    <Link to="/chat" className="home-links">
+                        <div className="home-card">
+                            <FontAwesomeIcon icon={faRobot} className="home-icons" />
+                            <h2 className="home-title">Chat</h2>
+                        </div>
+                    </Link>
                 </div>  
 
                

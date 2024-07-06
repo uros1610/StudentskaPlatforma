@@ -16,6 +16,7 @@ import AddMaterial from "./components/AddMaterial";
 import EditMaterials from "./components/EditMaterials";
 import Kalendar from "./pages/Kalendar";
 import AdminPanel from "./components/AdminPanel";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -179,6 +180,17 @@ function App() {
         }
 
       />
+
+      <Route
+          path="/chat"
+          element={
+            <>
+              <Header />
+              <Chat />
+              <Footer />
+            </>
+          }
+        />
 
       </Routes>
     </div>
