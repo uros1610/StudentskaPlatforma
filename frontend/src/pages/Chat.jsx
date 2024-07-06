@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import AuthContext from '../context/AuthContext'
 import { useContext } from "react";
+import { FaUser } from 'react-icons/fa'
+
 
 function Chat() {
     const { user } = useContext(AuthContext);
@@ -59,49 +61,46 @@ function Chat() {
                 <FontAwesomeIcon icon={faRobot} className="home-icons" />
                 <h1>Chat</h1>
             </div>
-            <div style={{ maxWidth: '500px', margin: 'auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px', marginBlock: '30px' }}>
-            <div id="chat-title">
-                <FontAwesomeIcon icon={faRobot} className="home-icons" />
-                <h1>ChatBot</h1>
-            </div>
-            <div ref={chatContainerRef} style={{ height: '300px', overflowY: 'auto', marginBottom: '10px', marginTop: '15px', position: 'relative' }}>
-                <div style={{ position: 'absolute', bottom: 0, width: '100%' }}></div>
-                {chat.map((message, index) => (
-                <div key={index} style={{ display: 'flex', justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start', marginBottom: '10px' }}>
-                    <p style={{
-                    maxWidth: '80%',
-                    wordWrap: 'break-word',
-                    whiteSpace: 'pre-wrap',
-                    margin: '5px',
-                    padding: '10px',
-                    borderRadius: '5px',
-                    backgroundColor: message.sender === 'bot' ? '#F4B392' : '#F4B392',
-                    color: message.sender === 'bot' ? '#000' : '#fff'
-                    }}>
-                    {message.sender === 'user' ? 'Korisnik: ' : 'Bot: '}
-                    {message.text}
-                    </p>
+            <div id="bigdiv">
+                <div ref={chatContainerRef} id="mess-div"  style={{ height: '300px', overflowY: 'auto', marginBottom: '10px', marginTop: '15px', position: 'relative' }}>
+                    <div id="nevidljivi" style={{ position: 'absolute', bottom: 0, width: '100%' }}></div>
+                    {chat.map((message, index) => (
+                        <div key={index} className={message.sender === 'user' ? 'user' : 'bot'} style={{ display: 'flex', justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start', marginBottom: '10px' }}>
+                            <p className={message.sender === 'bot' ? 'bot' : ''}
+                            style={{
+                                maxWidth: '80%',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                margin: '5px',
+                                padding: '10px',
+                                borderRadius: '5px',
+                                backgroundColor: message.sender === 'bot' ? '#0f75bd' : '#f7941d',
+                                color: message.sender === 'bot' ? '#fff' : '#fff'
+                                }}>
+                                {message.sender === 'user' ? <FaUser /> : <FontAwesomeIcon icon={faRobot} />}
+                                <span>  </span>{message.text}
+                            </p>
+                        </div>
+                    ))}
                 </div>
-                ))}
-            </div>
-            <div style={{ marginBottom: '10px', textAlign: 'center' }}>
-                {suggestions.map((suggestion, index) => (
-                <button key={index} onClick={() => handleSuggestionClick(suggestion)} style={{ marginRight: '10px', marginBottom: '10px'}}>
-                    {suggestion}
-                </button>
-                ))}
-            </div>
-            <div style={{ display: 'flex', marginBottom: '10px' }}>
-                <textarea
-                rows={1}
-                cols={50}
-                value={message}
-                onChange={handleInputChange}
-                placeholder="Napišite vaš upit ovdje..."
-                style={{ width: '100%', padding: '5px', borderRadius: '5px', resize: 'none' }}
-                />
-                <button onClick={sendMessage} style={{ padding: '10px 20px', backgroundColor: '#F4B392', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Pošalji upit</button>
-            </div>
+                <div id="neki-div">
+                    {suggestions.map((suggestion, index) => (
+                        <button key={index} onClick={() => handleSuggestionClick(suggestion)} className="btns">
+                            {suggestion}
+                        </button>
+                    ))}
+                </div>
+                <div id="pom-div">
+                    <textarea
+                        rows={1}
+                        cols={50}
+                        value={message}
+                        onChange={handleInputChange}
+                        placeholder="Pošaljite pitanje..."
+                        id="text-area"
+                    />
+                    <button onClick={sendMessage} id="sendbtn">Pošalji</button>
+                </div>
             </div>
         </main>
     );
