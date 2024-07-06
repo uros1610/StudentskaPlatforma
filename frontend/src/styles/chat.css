@@ -50,6 +50,12 @@
     border: 0px;
     background-color: #0f75bd;
     color: white;
+    cursor: pointer;
+}
+
+.btns:hover {
+    background-color: #f7941d;
+    color: white;
 }
 
 #pom-div {
@@ -73,6 +79,12 @@
     border-radius: 10px;
     border: 0px;
     background-color: #0f75bd;
+    color: white;
+    cursor: pointer;
+}
+
+#sendbtn:hover {
+    background-color: #f7941d;
     color: white;
 }
 
