@@ -12,13 +12,13 @@ import { useContext } from "react";
 function Chat() {
     const { user } = useContext(AuthContext);
     const [message, setMessage] = useState('');
-    const [chat, setChat] = useState([]);
+    const [chat, setChat] = useState([{ sender: 'bot', text: 'Zdravo! Kako Vam mogu pomoći?' }]);
     const [suggestions, setSuggestions] = useState([
-        'Zdravo!',
         'Koliko bodova imam iz predmeta [predmet]?',
         'Koji su dostupni materijali za predmet [predmet]?',
         'Koje predmete pohađam?',
-        'Svi predmeti koje predaje profesor [profesor]?'
+        'Svi predmeti koje predaje profesor [profesor]?',
+        'Izlistaj mi sva nepročitana obavještenja.'
     ]);
     const chatContainerRef = useRef(null);
 
@@ -27,7 +27,7 @@ function Chat() {
     }, [chat]);
 
     const sendMessage = async () => {
-        if (message.trim() === '') return; // Check for empty message
+        if (message.trim() === '') return; 
 
         const userMessage = { sender: 'user', text: message };
         setChat(prevChat => [...prevChat, userMessage]);
@@ -62,7 +62,7 @@ function Chat() {
             <div style={{ maxWidth: '500px', margin: 'auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px', marginBlock: '30px' }}>
             <div id="chat-title">
                 <FontAwesomeIcon icon={faRobot} className="home-icons" />
-                <h1>Chat</h1>
+                <h1>ChatBot</h1>
             </div>
             <div ref={chatContainerRef} style={{ height: '300px', overflowY: 'auto', marginBottom: '10px', marginTop: '15px', position: 'relative' }}>
                 <div style={{ position: 'absolute', bottom: 0, width: '100%' }}></div>
@@ -71,6 +71,7 @@ function Chat() {
                     <p style={{
                     maxWidth: '80%',
                     wordWrap: 'break-word',
+                    whiteSpace: 'pre-wrap',
                     margin: '5px',
                     padding: '10px',
                     borderRadius: '5px',

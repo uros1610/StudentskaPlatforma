@@ -63,14 +63,23 @@ const getMaterials = (predmet, callback) => {
     });  
 };
 
+const getNotifications = (korisnicko_ime, callback) => {
+    const query = `
+        SELECT opis FROM neprocitano_obavjestenje n INNER JOIN obavjestenje o
+        ON n.id_obavjestenja=o.id_obavjestenja WHERE korisnickoime_studenta = ?
+    `;
+    db.query(query, [korisnicko_ime], (err, result) => {
+        if (err) return callback(err);
+        callback(null, result);
+    });
+};
+
 app.post('/chat/:korisnickoIme', async (req, res) => {
     const { prompt } = req.body;
     const korisnicko_ime = req.params.korisnickoIme;
     console.log(korisnicko_ime);
   
-    if (prompt.toLowerCase() === "zdravo!") {
-      return res.json({ reply: "Zdravo. Kako Vam mogu pomoći?" });
-    } else if (prompt.toLowerCase().includes("koliko bodova imam iz predmeta")) {
+    if (prompt.toLowerCase().includes("koliko bodova imam iz predmeta")) {
   
       const regex = /koliko bodova imam iz predmeta (.+)\?/i; 
       const match = prompt.match(regex);
@@ -84,7 +93,7 @@ app.post('/chat/:korisnickoIme', async (req, res) => {
           if (slots.length > 0) {
             res.json({ reply: `Vaš broj bodova iz predmeta ${predmet} je: ${slots.join(', ')}.` });
           } else {
-            res.json({ reply: `Nemate bodove iz tog predmeta.` });
+            res.json({ reply: `Nema rezultata za traženi predmet.` });
           }
         });
       } else {
@@ -118,7 +127,10 @@ app.post('/chat/:korisnickoIme', async (req, res) => {
             console.error(err);
             return res.status(500).json({ error: 'Greška prilikom pretraživanja podataka.' });
           }
-          res.status(200).json({ reply: `Profesor ${profesor} predaje predmete: ${result.map(row => row.ime_predmeta).join(', ')}.` });
+          else if (result.length === 0) {
+            return res.status(200).json({ reply: 'Nema rezultata za traženog profesora.' });
+          }
+            return res.status(200).json({ reply: `Profesor ${profesor} predaje predmete: ${result.map(row => row.ime_predmeta).join(', ')}.` });
         });
       } else {
         res.status(400).send('Pogrešan format pitanja.');
@@ -135,11 +147,25 @@ app.post('/chat/:korisnickoIme', async (req, res) => {
                 console.error(err);
                 return res.status(500).json({ error: 'Greška prilikom pretraživanja podataka.' });
             }
-            res.status(200).json({ reply: `Dostupni materijali za predmet ${predmet} su: ${result.map(row => row.naslov).join(', ')}.` });
+            else if (result.length === 0) {
+                return res.status(200).json({ reply: 'Nema rezultata za traženi predmet.' });
+              }
+                return res.status(200).json({ reply: `Dostupni materijali za predmet ${predmet} su: ${result.map(row => row.naslov).join(', ')}.` });
             });
         } else {
             res.status(400).send('Pogrešan format pitanja.');
         }
+    } else if (prompt.toLowerCase().includes("izlistaj mi sva nepročitana obavještenja")) {
+        getNotifications(korisnicko_ime, (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Greška prilikom pretraživanja podataka.' });
+            }
+            else if (result.length === 0) {
+                return res.status(200).json({ reply: 'Nema nepročitanih obavještenja.' });
+            }
+            return res.status(200).json({ reply: `Nepročitana obavještenja su:\n${result.map((row, index) => `${index+1}. ${row.opis}`).join('\n')}.` });
+        });
     }
     else {
       res.json({ reply: "Ne mogu da odgovorim na Vaše pitanje." });
