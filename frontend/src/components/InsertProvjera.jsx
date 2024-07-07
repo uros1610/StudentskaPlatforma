@@ -10,6 +10,7 @@ const InsertProvjera = ({open,setOpen,imePredmeta,imeSmjera,imeFakulteta}) => {
     const [odabran,setOdabran] = useState();
 
     const [dateTime, setDateTime] = useState('');
+    const [error,setError] = useState("");
 
     const handleDateTimeChange = (e) => {
         setDateTime(e.target.value);
@@ -21,6 +22,11 @@ const InsertProvjera = ({open,setOpen,imePredmeta,imeSmjera,imeFakulteta}) => {
         const datum = new Date(dateTime).toLocaleString();
 
         console.log(ime,datum);
+
+        if(isNaN(new Date(datum).getTime())) {
+            setError("Odaberite pravilan datum!");
+            return;
+        }
 
         try {
             const response = await axios.post(`/provjera/${imePredmeta}/${imeSmjera}/${imeFakulteta}`,{imeProvjere:ime,datumOdrzavanja:datum});
@@ -62,6 +68,8 @@ const InsertProvjera = ({open,setOpen,imePredmeta,imeSmjera,imeFakulteta}) => {
                 position:'relative'
             }}>
 
+            
+
             <button style = {{
                     position:'absolute',
                     top:'5px',
@@ -80,6 +88,16 @@ const InsertProvjera = ({open,setOpen,imePredmeta,imeSmjera,imeFakulteta}) => {
                     gap:'20px',
                     flexDirection:'column'
                 }}>
+
+                {error && <p style = {{
+                                fontSize:'25px',
+                                color:'#0f75bd'
+
+
+                            }}>{error}</p>}
+
+                            
+
                     <h2 style = {{
                         color:'#0f75bd'
                     }}>Dodajte provjeru</h2>
