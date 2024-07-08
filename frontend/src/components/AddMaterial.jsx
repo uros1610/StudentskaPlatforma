@@ -5,7 +5,7 @@ import '../styles/addmaterial.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const AddMaterial = ({ onClose,materials,setMaterials}) => {
+const AddMaterial = ({ onClose,materials,setMaterials,currentPage,ukupno,setUkupno}) => {
     const [files, setFiles] = useState([]);
     const [comment, setComment] = useState('');
     const {imePredmeta,imeSmjera,imeFakulteta} = useParams();
@@ -14,6 +14,21 @@ const AddMaterial = ({ onClose,materials,setMaterials}) => {
         const selectedFiles = Array.from(e.target.files);
         setFiles(prevFiles => [...prevFiles, ...selectedFiles]);
     };
+
+    const fetchMaterijali = async () => {
+        try {
+            const response = await axios.get(`/materijal/MaterijaliPredmeta/${imePredmeta}/${imeSmjera}/${imeFakulteta}/${currentPage}`);
+            const response2 = await axios.get(`/materijal/UkupanBrojMaterijala/${imePredmeta}/${imeSmjera}/${imeFakulteta}`);
+            console.log(response.data);
+            setMaterials(response.data);
+            setUkupno(response2.data[0].brojMaterijala)
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+
+
 
   
     const handleSubmit = async (e) => {
@@ -35,15 +50,16 @@ const AddMaterial = ({ onClose,materials,setMaterials}) => {
                     }
                 });
 
-                setMaterials([{naslov:comment,putanja:file.name},...materials])
+                setMaterials([{naslov:comment,putanja:file.name},...materials]);
+                fetchMaterijali();
     
                 console.log(response.data);
             });
     
-            // Wait for all uploads to complete
+            
             await Promise.all(uploadPromises);
     
-            // Call onClose with the names of the uploaded files and the comment
+            
             onClose({ name: files.map(file => file.name).join(', '), comment });
         } catch (err) {
             console.log(err);

@@ -18,7 +18,6 @@ const EditMaterials = () => {
     
     
 
-    const [sections,setSections] = useState([]);
 
     const fetchMaterijali = async () => {
         try {
@@ -37,9 +36,9 @@ const EditMaterials = () => {
         try {
             console.log(id);
             const response = await axios.delete(`/materijal/ObrisiMaterijal/${id}/${putanja}`);
-            setMaterials(materials.filter(material => material.id !== id))
+            setMaterials(materials.filter(material => material.id !== id));
             alert("Uspjesno obrisan materijal!");
-
+            fetchMaterijali();
         }
         catch(err) {
             console.log(err);
@@ -100,7 +99,7 @@ const EditMaterials = () => {
                     
                 </button>
 
-            {showAddMaterial && <AddMaterial onClose={handleAddMaterialClose} materials={materials} setMaterials={setMaterials} />}
+            {showAddMaterial && <AddMaterial onClose={handleAddMaterialClose} materials={materials} setMaterials={setMaterials} currentPage={currentPage} ukupno = {ukupno} setUkupno={setUkupno}/>}
 
             <Pagination itemsPerPage={subjPerPage}
                 totalItems={ukupno}
