@@ -232,36 +232,35 @@ exports.obrisiMaterijal = (req, res) => {
     const id = req.params.id;
     const ime_fajla = req.params.imeMaterijala;
 
-    console.log(id,ime_fajla);
+    console.log(id, ime_fajla);
 
     const query = `DELETE FROM materijal WHERE id_materijala = ?`;
-    const filePath = './public/files/'+ime_fajla;
+    const filePath = './public/files/' + ime_fajla;
 
     console.log(filePath);
 
     const token = req.headers.authorization.split(" ")[1];
-    jwt.verify(token,process.env.SECRET_KEY,(err,data) => {
-
-        if(err) {
+    jwt.verify(token, process.env.SECRET_KEY, (err, data) => {
+        if (err) {
             return res.status(403).json("Forbidden!");
         }
-        
-        db.query(query,[id], (err,results) => {
+
+        db.query(query, [id], (err, results) => {
             if (err) {
                 return res.status(500).json(err);
             }
 
-            if(results.affectedRows === 0){
+            if (results.affectedRows === 0) {
                 return res.status(404).json("Material not found");
             }
-            
+
             fs.unlink(filePath, (err) => {
                 if (err) {
-                  return res.status(500).json({ error: 'Failed to delete material', details: err });
+                    return res.status(500).json({ error: 'Failed to delete material', details: err });
                 }
-            });
 
-            res.status(200).json({message:'Successfully deleted material'});
+                res.status(200).json({ message: 'Successfully deleted material' });
+            });
         });
     });
 }
