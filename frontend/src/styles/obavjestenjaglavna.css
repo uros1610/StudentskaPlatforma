@@ -1,0 +1,43 @@
+.sviPredmetiObavjestenja {
+    padding:30px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:30px;
+    
+}
+
+#not-ttl {
+    color: #0f75bd;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#not-icn {
+    font-size: 25px;
+    color: #0f75bd;
+}
+
+.selectDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:30px;
+    width: max-content;
+}
+
+.selectDiv select {
+    width:50%;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #0f75bd;
+    border: 1px solid #0f75bd;
+}

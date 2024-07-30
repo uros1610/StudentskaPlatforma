@@ -1,0 +1,122 @@
+
+#wrapForResults {
+    padding:20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    background-color: rgb(240,240,240);
+    flex-direction: column;
+}
+
+#wrapForResults h1 {
+    color:#0f75bd;
+}
+
+#mainDivForResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:30px;
+    padding:20px;
+    background-color: white;
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#resultsTable {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#resultsTableHeadRow {
+    background-color: #f7941d;
+    color: white;
+}
+
+
+
+#resultsTableHeadRow tr th {
+    padding: 15px;
+    text-align: center;
+}
+
+#resultsTable td {
+    text-align: center;
+}
+
+#bodyOfResultsTable tr td {
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+
+.numberOfPoints {
+    height: 25px;
+    min-width: 50px;
+    width: 50%;
+    text-align: center;
+    background-color: rgb(240,240,240);
+    border: none;
+    border-radius:5px;
+}
+
+.numberOfPoints:focus {
+    outline: none;
+}
+
+#saveButton {
+        margin-top: 10px;
+        background-color: #f7941d;
+        color:#E8EDF0;
+        border: none;
+        border-radius: 10px;
+        width: max-content;
+        padding: 15px;
+}
+
+#saveButton:hover {
+    background-color: #0f75bd;
+    cursor: pointer;
+}
+
+#searchDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:10px;
+    width:70%;
+}
+
+#searchDiv input:focus {
+    outline: none;
+}
+
+#searchDiv input {
+    background-color: #f7941d;
+    color:white;
+    border: none;
+    border-radius: 20px;
+    padding:10px 10px;
+    width:50%;
+}
+
+#searchDiv input::placeholder {
+    color: white;
+}
+
+@media (max-width:500px) {
+    #wrapForResults {
+        padding: 0;
+        background-color: white;
+    }
+}
+
+
+
+
+

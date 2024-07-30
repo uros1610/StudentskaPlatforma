@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0f75bd;
+}
+
+#content-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(255, 254, 254, 0.5);
+    background-color: white;
+}
+
+#login-img {
+    width: 500px;
+}
+
+#h1-login {
+    text-align: center;
+    font-size: 46px;
+    color: #0f75bd;
+}
+
+#login-p-mess {
+    text-align: center;
+    color: #703452;
+    /* padding-bottom: 50px; */
+}
+
+#form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-lbl {
+    padding-bottom: 10px;
+    color: #703452;
+}
+
+.inputUserNameDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid #0f75bd;
+    padding: 10px;
+}
+
+.inputUserNameDiv input {
+    border: none;
+    outline: none;
+}
+
+.userIcon {
+    color: #0f75bd;
+}
+
+.lockIcon {
+    color: #0f75bd;
+
+}
+
+.inputPasswordDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid #0f75bd;
+    padding: 10px;
+}
+
+.inputPasswordDiv input {
+    border: none;
+    outline: none;
+}
+
+.loginButton {
+    margin-top: 10px;
+    background-color: #0f75bd;
+    color: white;
+    width: max-content;
+    padding: 10px;
+    border: 1px solid #a45d830a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    scale: 1;
+    transition: all 0.5s ease;
+}
+
+#login-div {
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+#login-logo-img {
+    width: 100px;
+}
+
+#logo-title-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#login-ttl {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#image-login {
+    display: flex;
+    justify-content: center;
+}
+
+#logo-title-login img {
+    width: 50px;
+}
+
+.loginButton:hover {
+    background-color: #f7941d;
+    color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    scale: 1.1;
+    transition: all 0.5s ease;
+}
+
+#login-img {
+    border-radius: 10px;
+}

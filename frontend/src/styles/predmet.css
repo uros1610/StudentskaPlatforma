@@ -1,0 +1,48 @@
+.predmetDiv {
+    display: flex;
+    align-items: center;
+    gap:10px;
+    background-color: #0f74bd28;
+    color: #0f75bd;
+    font-weight: bold;
+    padding:30px 30px;
+    width:50%;
+    min-width: 340px;
+    border-radius: 20px;
+    text-decoration: none;
+    position: relative;
+}
+
+
+.predmetDiv:hover .obavjestenjeIkonica {
+    transition: scale 0.3s ease-in-out;
+    scale:1.3
+}
+
+.imePredmeta {
+    flex:5;
+}
+.obavjestenjeIkonica {
+    color: #f7941d;
+    min-height:50px;
+    min-width: 50px;
+    scale: 1;
+    transition: scale 0.3s ease-in-out;
+
+
+}
+
+#brojNeprocitanihObavjestenja {
+    border-radius:50%;
+    background-color: #f7941d;
+    width:35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:-15px;
+    position: absolute;
+    right: -15px;
+
+}
+
